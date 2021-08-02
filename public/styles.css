@@ -1,0 +1,27 @@
+/* #A6E0AC (Celadon), #A6BDE0 (Light Steel Blue) #E0A6DA (Light Orchid) */
+
+body {
+    margin: 0;
+    line-height: 1.5;
+    font-family: "Helvetica", "Arial", sans-serif;
+    background-color: #E0C9A6;
+}
+
+header {
+    background-color: #A6BDE0;
+    border-bottom: 3px solid black; 
+    position: sticky; top: 0; 
+}
+
+#nav, main { 
+    margin: 0 auto; 
+    max-width: 50em;
+}
+
+nav { float: right; }
+#nav > * { font-size: 1.75rem; }
+#nav a { text-decoration: none; color: black; font-weight: bold; }
+#nav { padding: 0.25em; }
+
+pre { background-color: #eee; padding: 1em; border-left: 3px solid black; }
+a { color: #5c6491; }
