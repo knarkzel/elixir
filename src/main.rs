@@ -3,6 +3,10 @@ extern crate rocket;
 
 use elixir::*;
 use rocket::fs::FileServer;
+use rocket_sync_db_pools::{database, diesel};
+
+#[database("elixir")]
+struct DbConn(diesel::SqliteConnection);
 
 #[get("/")]
 fn index() -> Html<String> {
@@ -14,6 +18,7 @@ fn index() -> Html<String> {
 #[launch]
 fn rocket() -> _ {
     rocket::build()
+        .attach(DbConn::fairing())
         .mount("/", routes![index])
         .mount("/public", FileServer::from("public"))
 }
