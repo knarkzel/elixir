@@ -5,6 +5,11 @@
   <body>
     <% include!("nav.stpl"); %>
     <main>
+      <ul>
+      <% for post in posts { %>
+        <li>id: <%= post.id %> with content: <pre><%= post.content %></pre></li>
+      <% } %>
+      </ul>
       <p>
         Let's say you have a product, a portfolio, or just an idea you want to
         share with everyone on your own website. Before you publish it on the

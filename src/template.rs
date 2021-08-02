@@ -3,5 +3,5 @@ use crate::*;
 #[derive(TemplateOnce)]
 #[template(path = "index.stpl")]
 pub struct Index {
-    pub messages: Vec<String>,
+    pub posts: Vec<models::Post>,
 }

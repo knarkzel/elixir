@@ -23,5 +23,5 @@ nav { float: right; }
 #nav a { text-decoration: none; color: black; font-weight: bold; }
 #nav { padding: 0.25em; }
 
-pre { background-color: #eee; padding: 1em; border-left: 3px solid black; }
+pre { background-color: #eee; padding: 1em; border-left: 3px solid black; white-space: pre-line; }
 a { color: #5c6491; }
