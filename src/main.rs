@@ -1,5 +1,7 @@
 #[macro_use]
 extern crate rocket;
+#[macro_use]
+extern crate diesel_migrations;
 
 use diesel::prelude::*;
 use elixir::*;
@@ -19,8 +21,20 @@ async fn index(db: DbConn) -> Html<String> {
     Html(index.render_once().unwrap())
 }
 
+embed_migrations!();
+
 #[launch]
 fn rocket() -> _ {
+    // Get connection to database and load migrations.
+    let conn = {
+        use diesel::SqliteConnection;
+        const URL: &str = "database/elixir.sqlite";
+        SqliteConnection::establish(&URL).expect(&format!("Error connecting to {}", URL))
+    };
+    embedded_migrations::run_with_output(&conn, &mut std::io::stdout())
+        .expect("Failed to run migrations");
+
+    // Launch!
     rocket::build()
         .attach(DbConn::fairing())
         .mount("/", routes![index])
