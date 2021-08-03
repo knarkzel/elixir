@@ -3,25 +3,33 @@
 body {
     margin: 0;
     line-height: 1.5;
-    font-family: "Helvetica", "Arial", sans-serif;
     background-color: #E0C9A6;
+    font-family: "Helvetica", "Arial", sans-serif;
 }
 
 header {
-    background-color: #A6BDE0;
-    border-bottom: 3px solid black; 
-    position: sticky; top: 0; 
+    top: 0; 
+    position: sticky;
+    background-color: #E0C9A6;
 }
 
 #nav, main { 
     margin: 0 auto; 
     max-width: 50em;
+    border-bottom: 2px solid black;
 }
 
-nav { float: right; }
-#nav > * { font-size: 1.75rem; }
-#nav a { text-decoration: none; color: black; font-weight: bold; }
-#nav { padding: 0.25em; }
+pre { 
+    padding: 1em;
+    white-space: pre-line;
+    background-color: #eee;
+    border-left: 2px solid black;
+}
 
-pre { background-color: #eee; padding: 1em; border-left: 3px solid black; white-space: pre-line; }
-a { color: #5c6491; }
+a:hover { text-decoration: underline; }
+a { text-decoration: none; color: #5c6491; }
+
+nav { float: right; }
+#nav { padding: 0.25em; }
+#nav > * { font-size: 1.5rem; }
+#nav a { color: black; }

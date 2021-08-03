@@ -2,11 +2,11 @@
   <div id="nav">
     <a href="#">Elixir</a>
     <nav>
-      <a href="#">Item 1</a>
-      |
-      <a href="#">Item 2</a>
-      |
-      <a href="#">Item 3</a>
+      <a href="#">Posts</a>
+      /
+      <a href="#">Communities</a>
+      / 
+      <a href="#">Comments</a>
     </nav>
   </div>
 </header>
