@@ -29,6 +29,14 @@ fn error_page(cause: String) -> Html<String> {
     Html(template.render_once().unwrap())
 }
 
+macro_rules! redirect_error {
+    ($value:expr) => {
+        if let Err(e) = $value {
+            return Redirect::to(uri!(error_page(e.to_string())));
+        }
+    };
+}
+
 #[get("/login")]
 fn login_page() -> Html<String> {
     let template = template::Login {};
@@ -37,10 +45,8 @@ fn login_page() -> Html<String> {
 
 #[post("/login", data = "<form>")]
 async fn login(mut auth: Auth<'_>, form: Form<Login>) -> Redirect {
-    match auth.login(&form).await {
-        Ok(_) => Redirect::to(uri!("/")),
-        Err(e) => Redirect::to(uri!(error_page(e.to_string()))),
-    }
+    redirect_error!(auth.login(&form).await);
+    Redirect::to(uri!("/"))
 }
 
 #[get("/register")]
@@ -50,10 +56,10 @@ fn register_page() -> Html<String> {
 }
 
 #[post("/register", data = "<form>")]
-async fn register(mut auth: Auth<'_>, form: Form<Signup>) -> Result<Redirect, rocket_auth::Error> {
-    auth.signup(&form).await?;
-    auth.login(&form.into()).await?;
-    Ok(Redirect::to(uri!("/")))
+async fn register(mut auth: Auth<'_>, form: Form<Signup>) -> Redirect {
+    redirect_error!(auth.signup(&form).await);
+    redirect_error!(auth.login(&form.into()).await);
+    Redirect::to(uri!("/"))
 }
 
 #[post("/new", data = "<new_post>")]
