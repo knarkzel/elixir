@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <% include!("head.stpl"); %>
+  </head>
+  <body>
+    <% include!("nav.stpl"); %>
+    <main>
+      <form id="form-middle" action="/login" method="POST">
+        <div>
+          <label for="email">Email: </label>
+          <input type="email" name="email" required autofocus>
+        </div>
+        <div>
+          <label for="password">Password: </label>
+          <input type="password" name="password" required>
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </main>
+  </body>
+</html>

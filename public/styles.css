@@ -1,22 +1,12 @@
-/* #A6E0AC (Celadon), #A6BDE0 (Light Steel Blue) #E0A6DA (Light Orchid) */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+}
 
 body {
-    margin: 0;
     line-height: 1.5;
-    background-color: #E0C9A6;
     font-family: "Helvetica", "Arial", sans-serif;
-}
-
-header {
-    top: 0; 
-    position: sticky;
-    background-color: #E0C9A6;
-}
-
-#nav, main { 
-    margin: 0 auto; 
-    max-width: 50em;
-    border-bottom: 2px solid black;
 }
 
 pre { 
@@ -26,10 +16,46 @@ pre {
     border-left: 2px solid black;
 }
 
-a:hover { text-decoration: underline; }
-a { text-decoration: none; color: #5c6491; }
+header {
+    top: 0; 
+    position: sticky;
+    background-color: white;
+    margin-bottom: 0.5em;
+}
 
-nav { float: right; }
+#nav, main { 
+    margin: 0 auto; 
+    max-width: 50em;
+}
+#nav { border-bottom: 2px solid black; }
 #nav { padding: 0.25em; }
 #nav > * { font-size: 1.5rem; }
 #nav a { color: black; }
+nav { float: right; }
+
+a:hover { text-decoration: underline; }
+a { text-decoration: none; }
+
+input, textarea, button {
+    padding: 0.25em;
+    font-size: inherit;
+    border: 1px solid black;
+}
+
+button {
+    color: #fff;
+    padding: 0.5em 1em;
+    background: #0062cc; 
+}
+
+button:hover { 
+    background: #007bff;
+    cursor: pointer;
+}
+
+#form-middle {
+    margin: 0 auto;
+    max-width: 30em;
+}
+#form-middle input { width: 100%; margin: 0.25em 0; }
+#form-middle button { float: right; }

@@ -1,4 +1,5 @@
 use super::schema::post;
+use rocket::form::FromForm;
 
 #[derive(Queryable, Debug)]
 pub struct Post {
@@ -6,8 +7,8 @@ pub struct Post {
     pub content: String,
 }
 
-#[derive(Insertable)]
+#[derive(Insertable, FromForm)]
 #[table_name = "post"]
-pub struct PostForm<'a> {
-    pub content: &'a str,
+pub struct PostForm {
+    pub content: String,
 }

@@ -5,6 +5,10 @@
   <body>
     <% include!("nav.stpl"); %>
     <main>
+      <form action="/post/create" method="POST">
+        <input type="textarea" name="content">
+        <button>Create new post</button>
+      </form>
       <p>
         Let's say you have a product, a portfolio, or just an idea you want to
         share with everyone on your own website. Before you publish it on the
@@ -16,52 +20,6 @@
         <li>id: <%= post.id %> with content: <pre><%= post.content %></pre></li>
       <% } %>
       </ul>
-      <p>
-        Let's say you have a product, a portfolio, or just an idea you want to
-        share with everyone on your own website. Before you publish it on the
-        internet, you want to make it look attractive, professional, or at least
-        decent to look at.
-      </p>
-      <h2>Content</h2>
-      <pre>The purpose of design is to enhance the presentation of the content it's
-applied to. It might sound obvious, but content being the primary element
-of a website, it should not be established as an afterthought.</pre>
-      <p>
-        The purpose of design is to enhance the presentation of the content it's
-        applied to. It might sound obvious, but content being the primary element
-        of a website, it should not be established as an afterthought. For more,
-        see <a href="https://ruckless.xyz">this link</a>.
-      </p>
-      <p>
-        The purpose of design is to enhance the presentation of the content it's
-        applied to. It might sound obvious, but content being the primary element
-        of a website, it should not be established as an afterthought. For more,
-        see <a href="https://ruckless.xyz">this link</a>.
-      </p>
-      <p>
-        The purpose of design is to enhance the presentation of the content it's
-        applied to. It might sound obvious, but content being the primary element
-        of a website, it should not be established as an afterthought. For more,
-        see <a href="https://ruckless.xyz">this link</a>.
-      </p>
-      <p>
-        The purpose of design is to enhance the presentation of the content it's
-        applied to. It might sound obvious, but content being the primary element
-        of a website, it should not be established as an afterthought. For more,
-        see <a href="https://ruckless.xyz">this link</a>.
-      </p>
-      <p>
-        The purpose of design is to enhance the presentation of the content it's
-        applied to. It might sound obvious, but content being the primary element
-        of a website, it should not be established as an afterthought. For more,
-        see <a href="https://ruckless.xyz">this link</a>.
-      </p>
-      <p>
-        The purpose of design is to enhance the presentation of the content it's
-        applied to. It might sound obvious, but content being the primary element
-        of a website, it should not be established as an afterthought. For more,
-        see <a href="https://ruckless.xyz">this link</a>.
-      </p>
     </main>
   </body>
 </html>

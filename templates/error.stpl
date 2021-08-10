@@ -1,0 +1,11 @@
+<html>
+  <head>
+    <% include!("head.stpl"); %>
+  </head>
+  <body>
+    <% include!("nav.stpl"); %>
+    <main>
+       <p><%= cause %></p>
+    </main>
+  </body>
+</html>

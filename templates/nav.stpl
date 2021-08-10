@@ -1,12 +1,10 @@
 <header>
   <div id="nav">
-    <a href="#">Elixir</a>
+    <a href="/">Elixir</a>
     <nav>
-      <a href="#">Posts</a>
-      /
-      <a href="#">Communities</a>
+      <a href="/login">Login</a>
       / 
-      <a href="#">Comments</a>
+      <a href="/register">Register</a>
     </nav>
   </div>
 </header>

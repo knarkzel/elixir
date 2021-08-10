@@ -20,3 +20,33 @@ cargo run
 - [sqlite](https://www.sqlite.org/index.html)
 - [sailfish](https://sailfish.netlify.app/en/)
 - [pulldown-cmark](https://github.com/raphlinus/pulldown-cmark)
+
+## Design
+
+- Flairs / Categories
+- Threads
+- Updoots
+- Comments / Posts
+- Fast search
+- Administration / Moderators
+
+Text only. Media is bloat?
+Random ascii art? Sort of like identifier.
+
+Thread:
+    - id
+    - title
+    - creation date
+    - unique updoots
+    - created by user
+
+A thread is just an id + list of comments. First comment is op. Each comment
+has a thread id that they're linked to. Timestamp. Updoots (per comment).
+Thread wide search, site wide search.
+
+Users create threads, like chans. Threads with high activity are ranked higher.
+After some period of time, these threads are "archived", like a forum (lets say
+24 to 48 hours).  Users can post comments to these threads. Link to other
+threads. Updoot threads, comments.  Authentication is simple: username,
+password. Threads can use "flairs" or be "flaired", for easier searching.
+Searching through threads + comments should be blazing fast.
