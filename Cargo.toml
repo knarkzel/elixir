@@ -7,16 +7,16 @@ edition = "2018"
 diesel = "1.4"
 rocket = "0.5.0-rc.1"
 diesel_migrations = "1.4"
-sailfish = { git = "https://github.com/knarkzel/sailfish" }
 libsqlite3-sys = { version = "0.22.2", features = ["bundled"] }
 color-backtrace = { version = "0.5", default-features = false }
-eyre = "0.6.5"
+
+[dependencies.sailfish]
+git = "https://github.com/knarkzel/sailfish"
+
+[dependencies.rocket_auth]
+path = "crates/rocket_auth"
+features = ["sqlite-db"]
 
 [dependencies.rocket_sync_db_pools]
 version = "0.1.0-rc.1"
 features = ["diesel_sqlite_pool"]
-
-[dependencies.rocket_auth]
-git = "https://github.com/tvallotton/rocket_auth"
-rev = "87b1c71"
-features = ["sqlite-db"]

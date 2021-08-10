@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <% include!("head.stpl"); %>
+  </head>
+  <body>
+    <% include!("nav.stpl"); %>
+    <main>
+      <form id="form-middle" action="/thread/create" method="POST">
+        <div>
+          <label for="title">Title: </label>
+          <input autocomplete="off" type="text" name="title" required autofocus>
+        </div>
+        <div>
+          <label for="categories">Categories (comma separated): </label>
+          <input autocomplete="off" type="text" name="categories" required>
+        </div>
+        <div>
+          <label for="body">Body (supports markdown): </label>
+          <textarea autocomplete="off" name="body" rows=10 required></textarea>
+        </div>
+        <button type="submit">Create new thread</button>
+      </form>
+    </main>
+  </body>
+</html>

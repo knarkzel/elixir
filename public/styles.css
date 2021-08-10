@@ -55,7 +55,11 @@ button:hover {
 
 #form-middle {
     margin: 0 auto;
-    max-width: 30em;
+    max-width: 35em;
 }
-#form-middle input { width: 100%; margin: 0.25em 0; }
+#form-middle input, textarea { width: 100%; margin: 0.25em 0; }
 #form-middle button { float: right; }
+
+textarea {
+  resize: none;
+}

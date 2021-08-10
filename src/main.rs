@@ -1,4 +1,3 @@
-#![feature(decl_macro)]
 #[macro_use]
 extern crate rocket;
 #[macro_use]
@@ -6,26 +5,23 @@ extern crate diesel_migrations;
 
 use diesel::prelude::*;
 use elixir::*;
-use rocket::{form::Form, fs::FileServer, response::Redirect, Request};
-use rocket_auth::{Auth, Error, Login, Signup, Users};
+use rocket::{form::Form, fs::FileServer, response::Redirect};
+use rocket_auth::{Auth, Login, Signup, User, Users};
 use rocket_sync_db_pools::{database, diesel};
 
 #[database("elixir")]
 struct DbConn(diesel::SqliteConnection);
 
 #[get("/")]
-async fn index_page(db: DbConn) -> Html<String> {
-    use models::Post;
-    use schema::post::dsl::*;
-
-    let posts = db.run(|conn| post.load::<Post>(conn)).await.unwrap();
-    let template = template::Index { posts };
+// async fn index_page(db: DbConn, user: Option<User>) -> Html<String> {
+async fn index_page(user: Option<User>) -> Html<String> {
+    let template = template::Index { user };
     Html(template.render_once().unwrap())
 }
 
 #[get("/error/<cause>")]
-fn error_page(cause: String) -> Html<String> {
-    let template = template::Error { cause };
+fn error_page(cause: String, user: Option<User>) -> Html<String> {
+    let template = template::Error { user, cause };
     Html(template.render_once().unwrap())
 }
 
@@ -39,7 +35,7 @@ macro_rules! redirect_error {
 
 #[get("/login")]
 fn login_page() -> Html<String> {
-    let template = template::Login {};
+    let template = template::Login { user: None };
     Html(template.render_once().unwrap())
 }
 
@@ -51,7 +47,7 @@ async fn login(mut auth: Auth<'_>, form: Form<Login>) -> Redirect {
 
 #[get("/register")]
 fn register_page() -> Html<String> {
-    let template = template::Register {};
+    let template = template::Register { user: None };
     Html(template.render_once().unwrap())
 }
 
@@ -62,17 +58,23 @@ async fn register(mut auth: Auth<'_>, form: Form<Signup>) -> Redirect {
     Redirect::to(uri!("/"))
 }
 
-#[post("/new", data = "<new_post>")]
-async fn new_post(db: DbConn, new_post: Form<models::PostForm>) {
-    use schema::post;
-    db.run(|conn| {
-        diesel::insert_into(post::table)
-            .values(new_post.into_inner())
-            .execute(conn)
-            .unwrap()
-    })
-    .await;
+#[get("/create")]
+fn thread_create(user: User) -> Html<String> {
+    let template = template::ThreadCreate { user: Some(user) };
+    Html(template.render_once().unwrap())
 }
+
+// #[post("/new", data = "<new_post>")]
+// async fn new_post(db: DbConn, new_post: Form<models::PostForm>) {
+//     use schema::post;
+//     db.run(|conn| {
+//         diesel::insert_into(post::table)
+//             .values(new_post.into_inner())
+//             .execute(conn)
+//             .unwrap()
+//     })
+//     .await;
+// }
 
 embed_migrations!();
 
@@ -109,7 +111,7 @@ async fn rocket() -> _ {
                 login_page
             ],
         )
-        .mount("/post", routes![new_post])
+        .mount("/thread", routes![thread_create])
         .mount("/public", FileServer::from("public"))
         .manage(users)
 }

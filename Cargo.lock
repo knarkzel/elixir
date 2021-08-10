@@ -548,7 +548,6 @@ dependencies = [
  "color-backtrace",
  "diesel",
  "diesel_migrations",
- "eyre",
  "libsqlite3-sys",
  "rocket",
  "rocket_auth",
@@ -563,16 +562,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "80df024fbc5ac80f87dfef0d9f5209a252f2a497f7f42944cff24d8253cac065"
 dependencies = [
  "cfg-if",
-]
-
-[[package]]
-name = "eyre"
-version = "0.6.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "221239d1d5ea86bf5d6f91c9d6bc3646ffe471b08ff9b0f91c44f115ac969d2b"
-dependencies = [
- "indenter",
- "once_cell",
 ]
 
 [[package]]
@@ -617,9 +606,9 @@ dependencies = [
 
 [[package]]
 name = "filetime"
-version = "0.2.14"
+version = "0.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1d34cfa13a63ae058bfa601fe9e313bbdb3746427c1459185464ce0fcf62e1e8"
+checksum = "975ccf83d8d9d0d84682850a38c8169027be83368805971cc4f238c2b245bc98"
 dependencies = [
  "cfg-if",
  "libc",
@@ -963,12 +952,6 @@ dependencies = [
  "unicode-bidi",
  "unicode-normalization",
 ]
-
-[[package]]
-name = "indenter"
-version = "0.3.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ce23b50ad8242c51a442f3ff322d56b02f08852c77e4c0b4d3fd684abc89c683"
 
 [[package]]
 name = "indexmap"
@@ -1711,7 +1694,6 @@ dependencies = [
 [[package]]
 name = "rocket_auth"
 version = "0.4.0"
-source = "git+https://github.com/tvallotton/rocket_auth?rev=87b1c71#87b1c71f20667fbd441776ec8e8fc62b00eefdeb"
 dependencies = [
  "async-trait",
  "chashmap",
