@@ -4,19 +4,17 @@ version = "0.1.0"
 edition = "2018"
 
 [dependencies]
-diesel = "1.4"
 rocket = "0.5.0-rc.1"
-diesel_migrations = "1.4"
-libsqlite3-sys = { version = "0.22.2", features = ["bundled"] }
+rusqlite = { version = "0.25.3", features = ["bundled"] }
 color-backtrace = { version = "0.5", default-features = false }
 
 [dependencies.sailfish]
 git = "https://github.com/knarkzel/sailfish"
 
 [dependencies.rocket_auth]
-path = "crates/rocket_auth"
+git = "https://github.com/knarkzel/rocket_auth"
 features = ["sqlite-db"]
 
 [dependencies.rocket_sync_db_pools]
 version = "0.1.0-rc.1"
-features = ["diesel_sqlite_pool"]
+features = ["sqlite_pool"]

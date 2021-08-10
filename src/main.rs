@@ -1,19 +1,15 @@
 #[macro_use]
 extern crate rocket;
-#[macro_use]
-extern crate diesel_migrations;
 
-use diesel::prelude::*;
 use elixir::*;
 use rocket::{form::Form, fs::FileServer, response::Redirect};
 use rocket_auth::{Auth, Login, Signup, User, Users};
-use rocket_sync_db_pools::{database, diesel};
+use rocket_sync_db_pools::database;
 
-#[database("elixir")]
-struct DbConn(diesel::SqliteConnection);
+#[database("main")]
+struct DbConn(rusqlite::Connection);
 
 #[get("/")]
-// async fn index_page(db: DbConn, user: Option<User>) -> Html<String> {
 async fn index_page(user: Option<User>) -> Html<String> {
     let template = template::Index { user };
     Html(template.render_once().unwrap())
@@ -59,14 +55,14 @@ async fn register(mut auth: Auth<'_>, form: Form<Signup>) -> Redirect {
 }
 
 #[get("/create")]
-fn thread_create(user: User) -> Html<String> {
+fn thread_create_page(user: User) -> Html<String> {
     let template = template::ThreadCreate { user: Some(user) };
     Html(template.render_once().unwrap())
 }
 
 // #[post("/new", data = "<new_post>")]
-// async fn new_post(db: DbConn, new_post: Form<models::PostForm>) {
-//     use schema::post;
+// async fn thread_create(db: DbConn, new_thread: Form<models::PostForm>) {
+//     use schema::thread;
 //     db.run(|conn| {
 //         diesel::insert_into(post::table)
 //             .values(new_post.into_inner())
@@ -76,28 +72,15 @@ fn thread_create(user: User) -> Html<String> {
 //     .await;
 // }
 
-embed_migrations!();
-
 #[launch]
 async fn rocket() -> _ {
     color_backtrace::install();
+    migrations::install().expect("Error when migrating");
 
-    const URL: &str = "database/elixir.sqlite";
-
-    // Get connection to database and load migrations.
-    let conn = {
-        use diesel::SqliteConnection;
-        SqliteConnection::establish(&URL).expect(&format!("Error connecting to {}", &URL))
-    };
-    embedded_migrations::run_with_output(&conn, &mut std::io::stdout())
-        .expect("Failed to run migrations");
-
-    // Load users from rocket_auth
-    let users = Users::open_sqlite(URL)
+    let users = Users::open_sqlite(crate::URL)
         .await
-        .expect(&format!("Error connecting to {}", &URL));
+        .expect(&format!("Error connecting to {}", &crate::URL));
 
-    // Launch!
     rocket::build()
         .attach(DbConn::fairing())
         .mount(
@@ -111,7 +94,7 @@ async fn rocket() -> _ {
                 login_page
             ],
         )
-        .mount("/thread", routes![thread_create])
+        .mount("/thread", routes![thread_create_page])
         .mount("/public", FileServer::from("public"))
         .manage(users)
 }

@@ -1,2 +1,2 @@
 [global.databases]
-elixir = { url = "database/elixir.sqlite" }
+main = { url = "database/main.sqlite" }
