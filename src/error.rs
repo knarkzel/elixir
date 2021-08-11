@@ -14,20 +14,22 @@ pub enum ApiError {
     DbError(#[from] rusqlite::Error),
     #[error("Authentication failed")]
     AuthError(#[from] rocket_auth::Error),
-    #[error(transparent)]
-    Context(#[from] anyhow::Error),
 }
 
 impl<'r, 'o: 'r> Responder<'r, 'o> for ApiError {
     fn respond_to(self, _: &'r rocket::Request<'_>) -> Result<rocket::Response<'o>, Status> {
+        let context = format!("{}", self);
         let debug = format!("{:#?}", self);
         let cause = match self {
             ApiError::TemplateError(e) => e.to_string(),
             ApiError::DbError(e) => e.to_string(),
             ApiError::AuthError(e) => e.to_string(),
-            ApiError::Context(e) => e.to_string(),
         };
-        let template = template::Error { cause, debug };
+        let template = template::Error {
+            cause,
+            debug,
+            context,
+        };
         let body = template.render_once().unwrap();
         Response::build()
             .header(ContentType::HTML)

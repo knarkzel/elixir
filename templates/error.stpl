@@ -5,7 +5,8 @@
   <body>
     <% include!("basic_nav.stpl"); %>
     <main>
-       <p><%= cause %> (<code><%= debug %></code>)</p>
+        <h3><%= context %>: <code><%= debug %></code></h3>
+        <p><%= cause %></p>
     </main>
   </body>
 </html>

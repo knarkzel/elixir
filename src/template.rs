@@ -5,6 +5,7 @@ use crate::*;
 pub struct Error {
     pub cause: String,
     pub debug: String,
+    pub context: String,
 }
 
 #[derive(TemplateOnce)]

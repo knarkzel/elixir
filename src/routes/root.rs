@@ -14,7 +14,7 @@ pub fn login_page() -> Result<Html<String>> {
 
 #[post("/login", data = "<form>")]
 pub async fn login(mut auth: Auth<'_>, form: Form<Login>) -> Result<Redirect> {
-    auth.login(&form).await.context("Failed to login")?;
+    auth.login(&form).await?;
     Ok(Redirect::to(uri!("/")))
 }
 

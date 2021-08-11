@@ -11,7 +11,6 @@ pub use rocket_auth::{Auth, Login, Signup, User, Users};
 pub use routes::*;
 pub use rusqlite::params;
 pub use sailfish::TemplateOnce;
-pub use anyhow::Context;
 
 #[rocket_sync_db_pools::database("main")]
 pub struct Db(rusqlite::Connection);
