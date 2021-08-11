@@ -6,8 +6,10 @@ pub fn install() -> Result<()> {
     conn.execute(
         "CREATE TABLE IF NOT EXISTS threads (
             id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            user_id INTEGER NOT NULL,
             categories TEXT,
-            title TEXT NOT NULL
+            title TEXT NOT NULL,
+            published TEXT NOT NULL
         );",
         [],
     )?;
@@ -26,12 +28,9 @@ pub fn install() -> Result<()> {
     Ok(())
 }
 
-fn _uninstall() -> Result<()> {
-    let conn = Connection::open(crate::URL)?;
-
-    conn.execute("DROP TABLE IF EXISTS threads;", [])?;
-
-    conn.execute("DROP TABLE IF EXISTS comments;", [])?;
-
-    Ok(())
-}
+// fn uninstall() -> Result<()> {
+//     let conn = Connection::open(crate::URL)?;
+//     conn.execute("DROP TABLE IF EXISTS threads;", [])?;
+//     conn.execute("DROP TABLE IF EXISTS comments;", [])?;
+//     Ok(())
+// }

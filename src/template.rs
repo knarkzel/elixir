@@ -1,5 +1,4 @@
 use crate::*;
-use rocket_auth::User;
 
 #[derive(TemplateOnce)]
 #[template(path = "index.stpl")]
