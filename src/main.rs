@@ -63,7 +63,7 @@ fn thread_create_page(user: User) -> Html<String> {
     Html(template.render_once().unwrap())
 }
 
-#[derive(FromForm)]
+#[derive(FromForm, Clone)]
 struct Thread {
     title: String,
     categories: String,
@@ -71,18 +71,36 @@ struct Thread {
 }
 
 #[post("/create", data = "<new_thread>")]
-async fn thread_create(db: DbConn, new_thread: Form<Thread>, user: User) -> Redirect {
+async fn thread_create(db: DbConn, user: User, new_thread: Form<Thread>) -> Redirect {
     let utc: DateTime<Utc> = Utc::now();
-    let thread = new_thread.into_inner();
+    let inner = new_thread.into_inner();
+    let user_id = user.id();
+
+    // create thread
+    let thread = inner.clone();
     let err = db
         .run(move |conn| {
             conn.execute(
-                "INSERT INTO threads (title, categories, created_by, published) VALUES (?1, ?2, ?3, ?4)",
-                params![thread.title, thread.categories, user.id(), utc.to_string()],
+                "INSERT INTO threads (title, categories) VALUES (?1, ?2)",
+                params![thread.title, thread.categories],
             )
         })
         .await;
     redirect_error!(err);
+
+    // create comment
+    let thread = inner;
+    let thread_id = db.run(|conn| conn.last_insert_rowid()).await;
+    let err = db
+        .run(move |conn| {
+            conn.execute(
+                "INSERT INTO comments (thread_id, body, created_by, published) VALUES (?1, ?2, ?3, ?4)",
+                params![thread_id, thread.body, user.id(), utc.to_string()],
+            )
+        })
+        .await;
+    redirect_error!(err);
+
     Redirect::to(uri!("/"))
 }
 

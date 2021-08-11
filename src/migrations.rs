@@ -3,13 +3,21 @@ use rusqlite::{Connection, Result};
 pub fn install() -> Result<()> {
     let conn = Connection::open(crate::URL)?;
 
-    // THREADS
     conn.execute(
         "CREATE TABLE IF NOT EXISTS threads (
             id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
             categories TEXT,
-            title TEXT NOT NULL,
-            created_by INTEGER NOT NULL,
+            title TEXT NOT NULL
+        );",
+        [],
+    )?;
+
+    conn.execute(
+        "CREATE TABLE IF NOT EXISTS comments (
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            thread_id INTEGER NOT NULL,
+            user_id INTEGER NOT NULL,
+            body TEXT NOT NULL,
             published TEXT NOT NULL
         );",
         [],
@@ -18,11 +26,12 @@ pub fn install() -> Result<()> {
     Ok(())
 }
 
-fn uninstall() -> Result<()> {
+fn _uninstall() -> Result<()> {
     let conn = Connection::open(crate::URL)?;
 
-    // THREADS
     conn.execute("DROP TABLE IF EXISTS threads;", [])?;
+
+    conn.execute("DROP TABLE IF EXISTS comments;", [])?;
 
     Ok(())
 }
