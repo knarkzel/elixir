@@ -1,6 +1,12 @@
 use crate::*;
 
 #[derive(TemplateOnce)]
+#[template(path = "error.stpl")]
+pub struct Error {
+    pub cause: String,
+}
+
+#[derive(TemplateOnce)]
 #[template(path = "index.stpl")]
 pub struct Index {
     pub user: Option<User>,
@@ -16,13 +22,6 @@ pub struct Register {
 #[template(path = "login.stpl")]
 pub struct Login {
     pub user: Option<User>,
-}
-
-#[derive(TemplateOnce)]
-#[template(path = "error.stpl")]
-pub struct Error {
-    pub user: Option<User>,
-    pub cause: String,
 }
 
 #[derive(TemplateOnce)]

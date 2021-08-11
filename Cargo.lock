@@ -532,6 +532,7 @@ dependencies = [
  "rocket_sync_db_pools",
  "rusqlite",
  "sailfish",
+ "thiserror",
 ]
 
 [[package]]

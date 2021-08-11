@@ -10,11 +10,10 @@ async fn rocket() -> _ {
         .expect(&format!("Error connecting to {}", &crate::URL));
 
     rocket::build()
-        .attach(DbConn::fairing())
+        .attach(Db::fairing())
         .mount(
             "/",
             routes![
-                error_page,
                 root::index_page,
                 root::register_page,
                 root::login_page,
@@ -22,10 +21,7 @@ async fn rocket() -> _ {
                 root::login,
             ],
         )
-        .mount(
-            "/thread",
-            routes![thread::thread_create_page, thread::thread_create],
-        )
+        .mount("/thread", routes![thread::create_page, thread::create])
         .mount("/public", rocket::fs::FileServer::from("public"))
         .manage(users)
 }

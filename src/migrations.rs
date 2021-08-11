@@ -1,7 +1,5 @@
-use rusqlite::{Connection, Result};
-
-pub fn install() -> Result<()> {
-    let conn = Connection::open(crate::URL)?;
+pub fn install() -> rusqlite::Result<()> {
+    let conn = rusqlite::Connection::open(crate::URL)?;
 
     conn.execute(
         "CREATE TABLE IF NOT EXISTS threads (
@@ -27,10 +25,3 @@ pub fn install() -> Result<()> {
 
     Ok(())
 }
-
-// fn uninstall() -> Result<()> {
-//     let conn = Connection::open(crate::URL)?;
-//     conn.execute("DROP TABLE IF EXISTS threads;", [])?;
-//     conn.execute("DROP TABLE IF EXISTS comments;", [])?;
-//     Ok(())
-// }

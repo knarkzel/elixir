@@ -1,32 +1,32 @@
 use crate::*;
 
 #[get("/")]
-pub async fn index_page(user: Option<User>) -> Html<String> {
+pub async fn index_page(user: Option<User>) -> Result<Html<String>> {
     let template = template::Index { user };
-    Html(template.render_once().unwrap())
+    Ok(Html(template.render_once()?))
 }
 
 #[get("/login")]
-pub fn login_page() -> Html<String> {
+pub fn login_page() -> Result<Html<String>> {
     let template = template::Login { user: None };
-    Html(template.render_once().unwrap())
+    Ok(Html(template.render_once()?))
 }
 
 #[post("/login", data = "<form>")]
-pub async fn login(mut auth: Auth<'_>, form: Form<Login>) -> Redirect {
-    redirect_error!(auth.login(&form).await);
-    Redirect::to(uri!("/"))
+pub async fn login(mut auth: Auth<'_>, form: Form<Login>) -> Result<Redirect> {
+    auth.login(&form).await?;
+    Ok(Redirect::to(uri!("/")))
 }
 
 #[get("/register")]
-pub fn register_page() -> Html<String> {
+pub fn register_page() -> Result<Html<String>> {
     let template = template::Register { user: None };
-    Html(template.render_once().unwrap())
+    Ok(Html(template.render_once()?))
 }
 
 #[post("/register", data = "<form>")]
-pub async fn register(mut auth: Auth<'_>, form: Form<Signup>) -> Redirect {
-    redirect_error!(auth.signup(&form).await);
-    redirect_error!(auth.login(&form.into()).await);
-    Redirect::to(uri!("/"))
+pub async fn register(mut auth: Auth<'_>, form: Form<Signup>) -> Result<Redirect> {
+    auth.signup(&form).await?;
+    auth.login(&form.into()).await?;
+    Ok(Redirect::to(uri!("/")))
 }
