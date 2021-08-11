@@ -8,21 +8,26 @@ use thiserror::Error;
 
 #[derive(Error, Debug)]
 pub enum ApiError {
-    #[error("Template rendering failed: {0:?}.")]
+    #[error("Template rendering failed")]
     TemplateError(#[from] sailfish::RenderError),
-    #[error("Database failed: {0:?}.")]
+    #[error("Database failed")]
     DbError(#[from] rusqlite::Error),
-    #[error("Authentication failed: {0:?}.")]
+    #[error("Authentication failed")]
     AuthError(#[from] rocket_auth::Error),
-    #[error("Resource was not found.")]
-    NotFound,
+    #[error(transparent)]
+    Context(#[from] anyhow::Error),
 }
 
 impl<'r, 'o: 'r> Responder<'r, 'o> for ApiError {
     fn respond_to(self, _: &'r rocket::Request<'_>) -> Result<rocket::Response<'o>, Status> {
-        let template = template::Error {
-            cause: self.to_string(),
+        let debug = format!("{:#?}", self);
+        let cause = match self {
+            ApiError::TemplateError(e) => e.to_string(),
+            ApiError::DbError(e) => e.to_string(),
+            ApiError::AuthError(e) => e.to_string(),
+            ApiError::Context(e) => e.to_string(),
         };
+        let template = template::Error { cause, debug };
         let body = template.render_once().unwrap();
         Response::build()
             .header(ContentType::HTML)

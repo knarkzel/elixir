@@ -4,6 +4,7 @@ use crate::*;
 #[template(path = "error.stpl")]
 pub struct Error {
     pub cause: String,
+    pub debug: String,
 }
 
 #[derive(TemplateOnce)]

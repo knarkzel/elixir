@@ -3,8 +3,9 @@
     <% include!("head.stpl"); %>
   </head>
   <body>
+    <% include!("basic_nav.stpl"); %>
     <main>
-       <p><%= cause %></p>
+       <p><%= cause %> (<code><%= debug %></code>)</p>
     </main>
   </body>
 </html>

@@ -63,3 +63,10 @@ button:hover {
 textarea {
   resize: none;
 }
+
+code {
+    color: #bf616a;
+    border-radius: 3px;
+    padding: .25em .5em;
+    background-color: #f9f9f9;
+}
