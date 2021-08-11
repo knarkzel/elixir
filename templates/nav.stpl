@@ -3,7 +3,7 @@
     <a href="/">Elixir</a>
     <nav>
       <% if user.is_some() { %>
-        <a href="#"><%= user.as_ref().unwrap().email %></a>
+        <a href="#"><%= user.as_ref().unwrap().email() %></a>
       <% } else { %>
         <a href="/login">Login</a>
         / 

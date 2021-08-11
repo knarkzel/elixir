@@ -1,10 +1,12 @@
 #[macro_use]
 extern crate rocket;
 
+use chrono::prelude::*;
 use elixir::*;
 use rocket::{form::Form, fs::FileServer, response::Redirect};
 use rocket_auth::{Auth, Login, Signup, User, Users};
 use rocket_sync_db_pools::database;
+use rusqlite::params;
 
 #[database("main")]
 struct DbConn(rusqlite::Connection);
@@ -54,23 +56,35 @@ async fn register(mut auth: Auth<'_>, form: Form<Signup>) -> Redirect {
     Redirect::to(uri!("/"))
 }
 
+// THREADS
 #[get("/create")]
 fn thread_create_page(user: User) -> Html<String> {
     let template = template::ThreadCreate { user: Some(user) };
     Html(template.render_once().unwrap())
 }
 
-// #[post("/new", data = "<new_post>")]
-// async fn thread_create(db: DbConn, new_thread: Form<models::PostForm>) {
-//     use schema::thread;
-//     db.run(|conn| {
-//         diesel::insert_into(post::table)
-//             .values(new_post.into_inner())
-//             .execute(conn)
-//             .unwrap()
-//     })
-//     .await;
-// }
+#[derive(FromForm)]
+struct Thread {
+    title: String,
+    categories: String,
+    body: String,
+}
+
+#[post("/create", data = "<new_thread>")]
+async fn thread_create(db: DbConn, new_thread: Form<Thread>, user: User) -> Redirect {
+    let utc: DateTime<Utc> = Utc::now();
+    let thread = new_thread.into_inner();
+    let err = db
+        .run(move |conn| {
+            conn.execute(
+                "INSERT INTO threads (title, categories, created_by, published) VALUES (?1, ?2, ?3, ?4)",
+                params![thread.title, thread.categories, user.id(), utc.to_string()],
+            )
+        })
+        .await;
+    redirect_error!(err);
+    Redirect::to(uri!("/"))
+}
 
 #[launch]
 async fn rocket() -> _ {
@@ -94,7 +108,7 @@ async fn rocket() -> _ {
                 login_page
             ],
         )
-        .mount("/thread", routes![thread_create_page])
+        .mount("/thread", routes![thread_create_page, thread_create])
         .mount("/public", FileServer::from("public"))
         .manage(users)
 }

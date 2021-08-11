@@ -10,7 +10,7 @@ pub fn install() -> Result<()> {
             categories TEXT,
             title TEXT NOT NULL,
             created_by INTEGER NOT NULL,
-            published TEXT
+            published TEXT NOT NULL
         );",
         [],
     )?;
