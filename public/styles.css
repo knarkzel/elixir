@@ -10,9 +10,12 @@ body {
 }
 
 pre { 
-    padding: 1em;
     white-space: pre-line;
     background-color: #eee;
+}
+
+blockquote, pre {
+    padding: 0.5em;
     border-left: 2px solid black;
 }
 
@@ -23,18 +26,8 @@ header {
     margin-bottom: 0.5em;
 }
 
-#nav, main { 
-    margin: 0 auto; 
-    max-width: 50em;
-}
-#nav { border-bottom: 2px solid black; }
-#nav { padding: 0.25em; }
-#nav > * { font-size: 1.5rem; }
-#nav a { color: black; }
-nav { float: right; }
-
-a:hover { text-decoration: underline; }
-a { text-decoration: none; }
+a:hover { text-decoration: underline; color: #0242f2; }
+a { text-decoration: none; color: #0640e0; }
 
 input, textarea, button {
     padding: 0.25em;
@@ -53,13 +46,6 @@ button:hover {
     cursor: pointer;
 }
 
-#form-middle {
-    margin: 0 auto;
-    max-width: 35em;
-}
-#form-middle input, textarea { width: 100%; margin: 0.25em 0; }
-#form-middle button { float: right; }
-
 textarea {
   resize: none;
 }
@@ -69,4 +55,34 @@ code {
     border-radius: 3px;
     padding: .25em .5em;
     background-color: #f9f9f9;
+}
+
+nav { float: right; }
+
+#nav, main { 
+    margin: 0 auto; 
+    max-width: 50em;
+}
+#nav { border-bottom: 2px solid black; }
+#nav { padding: 0.25em; }
+#nav > * { font-size: 1.5rem; }
+#nav a { color: black; }
+
+#form-middle {
+    margin: 0 auto;
+    max-width: 35em;
+}
+#form-middle input, textarea { width: 100%; margin: 0.25em 0; }
+#form-middle button { float: right; }
+
+.thread-listing {
+    padding: 0.5em;
+    background: #f8f9fa;
+}
+
+#threads {
+    margin-top: 1em;
+    display: grid;
+    grid-gap: 0.5em;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
 }
