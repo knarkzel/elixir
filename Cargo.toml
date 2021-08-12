@@ -4,21 +4,17 @@ version = "0.1.0"
 edition = "2018"
 
 [dependencies]
+tokio = "1.10.0"
+chrono = "0.4.19"
+itertools = "0.10.1"
+thiserror = "1.0.26"
 rocket = "0.5.0-rc.1"
 rusqlite = { version = "0.25.3", features = ["bundled"] }
-color-backtrace = { version = "0.5", default-features = false }
-chrono = "0.4.19"
-thiserror = "1.0.26"
-tokio = "1.9.0"
-itertools = "0.10.1"
-
-[dependencies.sailfish]
-git = "https://github.com/knarkzel/sailfish"
+color-backtrace = { version = "0.5.1", default-features = false }
+rocket_sync_db_pools = { version = "0.1.0-rc.1", features = ["sqlite_pool"] }
 
 [dependencies.rocket_auth]
 git = "https://github.com/knarkzel/rocket_auth"
-features = ["sqlite-db"]
 
-[dependencies.rocket_sync_db_pools]
-version = "0.1.0-rc.1"
-features = ["sqlite_pool"]
+[dependencies.sailfish]
+git = "https://github.com/knarkzel/sailfish"
