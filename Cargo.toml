@@ -9,6 +9,8 @@ rusqlite = { version = "0.25.3", features = ["bundled"] }
 color-backtrace = { version = "0.5", default-features = false }
 chrono = "0.4.19"
 thiserror = "1.0.26"
+tokio = "1.9.0"
+itertools = "0.10.1"
 
 [dependencies.sailfish]
 git = "https://github.com/knarkzel/sailfish"

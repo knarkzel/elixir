@@ -8,13 +8,13 @@ pub struct Thread {
 }
 
 #[get("/create")]
-pub fn create_page(user: User) -> Result<Html<String>> {
+pub fn create_page(user: User) -> ApiResult<Html<String>> {
     let template = template::ThreadCreate { user: Some(user) };
     Ok(Html(template.render_once()?))
 }
 
 #[post("/create", data = "<thread>")]
-pub async fn create(db: Db, user: User, thread: Form<Thread>) -> Result<Redirect> {
+pub async fn create(db: Db, user: User, thread: Form<Thread>) -> ApiResult<Redirect> {
     let user_id = user.id();
     let time = Utc::now();
     let thread = thread.into_inner();

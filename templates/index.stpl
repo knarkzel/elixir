@@ -12,6 +12,16 @@
       <% } else { %>
         <p>You need to login or create a user in order to see threads</p>
       <% } %>
+      <% for thread in &threads { %>
+        <div> 
+          <ul>
+            <li><%= thread.title %></li>
+            <li><%= thread.email %></li>
+            <li><%= thread.categories %></li>
+            <li><%= thread.published %></li>
+          </ul>
+        </div>
+      <% } %>
     </main>
   </body>
 </html>

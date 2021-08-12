@@ -12,6 +12,7 @@ pub struct Error {
 #[template(path = "index.stpl")]
 pub struct Index {
     pub user: Option<User>,
+    pub threads: Vec<root::ThreadListing>,
 }
 
 #[derive(TemplateOnce)]

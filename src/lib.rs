@@ -4,6 +4,7 @@ pub mod routes;
 pub mod template;
 
 pub use chrono::prelude::*;
+pub use itertools::Itertools;
 pub use rocket::response::content::Html;
 pub use rocket::*;
 pub use rocket::{form::Form, response::Redirect};
@@ -17,4 +18,4 @@ pub struct Db(rusqlite::Connection);
 
 pub const URL: &str = "database/main.sqlite";
 
-pub type Result<T> = std::result::Result<T, error::ApiError>;
+pub type ApiResult<T> = std::result::Result<T, error::ApiError>;
