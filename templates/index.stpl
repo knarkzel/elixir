@@ -10,20 +10,9 @@
           <button>Create new thread</button>
         </a>
       <% } else { %>
-        <p>You need to login or create a user in order to see threads</p>
+        <p>You need to login or create a user in order to create threads.</p>
       <% } %>
-      <div id="threads">
-        <% for thread in &threads { %>
-          <div class="thread-listing"> 
-            <h3><%= thread.email %></h3>
-            <blockquote><%= thread.title %></blockquote>
-            <p>Published: <%= thread.published.split_whitespace().next().unwrap() %></p>
-            <% for category in thread.categories.split(",").map(str::trim).filter(|x| x.len() > 0) { %>
-              <a class="category" href="#">#<%= category %></a>
-            <% } %>
-          </div>
-        <% } %>
-      </div>
+      <% include!("threads.stpl"); %>
     </main>
   </body>
 </html>

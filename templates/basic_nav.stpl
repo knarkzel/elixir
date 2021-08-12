@@ -1,7 +1,6 @@
 <header>
   <div id="nav">
     <a href="/">Elixir</a>
-    <nav>
-    </nav>
+    <nav></nav>
   </div>
 </header>

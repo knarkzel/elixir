@@ -5,6 +5,7 @@ pub struct ThreadListing {
     pub email: String,
     pub categories: String,
     pub published: String,
+    pub link: String,
 }
 
 #[get("/")]
@@ -20,11 +21,16 @@ pub async fn index_page(db: Db, user: Option<User>) -> ApiResult<Html<String>> {
                 )
                 .unwrap();
             stmt.query_map([], |row| {
+                let title: String = row.get(0)?;
+                let email: String = row.get(1)?;
+                let href = title.to_lowercase().split_whitespace().join("-");
+                let link = format!("/{}/{}", email, href);
                 Ok(ThreadListing {
-                    title: row.get(0)?,
-                    email: row.get(1)?,
+                    title,
+                    email,
                     categories: row.get(2)?,
                     published: row.get(3)?,
+                    link,
                 })
             })
             .unwrap()

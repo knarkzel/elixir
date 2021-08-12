@@ -1,0 +1,15 @@
+<div id="threads">
+  <% for thread in &threads { %>
+    <div class="thread-listing"> 
+      <h3><%= thread.email %></h3>
+      <blockquote><%= thread.title %></blockquote>
+      <p>Published: <%= thread.published.split_whitespace().next().unwrap() %></p>
+      <% for category in thread.categories.split(",").map(str::trim).filter(|x| x.len() > 0) { %>
+        <a class="category" href="#">#<%= category %></a>
+      <% } %>
+      <a href=<%= thread.link %>>
+        <button>View</button>
+      </a>
+    </div>
+  <% } %>
+</div>
