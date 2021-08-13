@@ -32,3 +32,11 @@ pub struct Login {
 pub struct ThreadCreate {
     pub user: Option<User>,
 }
+
+#[derive(TemplateOnce)]
+#[template(path = "thread_view.stpl")]
+pub struct ThreadView {
+    pub user: Option<User>,
+    pub thread: thread::ThreadData,
+    pub comments: Vec<thread::ThreadComment>,
+}

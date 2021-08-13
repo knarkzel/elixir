@@ -48,3 +48,75 @@ pub async fn create(db: Db, user: User, thread: Form<Thread>) -> ApiResult<Redir
 
     Ok(Redirect::to(uri!("/")))
 }
+
+#[derive(Debug)]
+pub struct ThreadComment {
+    pub email: String,
+    pub body: String,
+    pub published: String,
+}
+
+#[derive(Debug)]
+pub struct ThreadData {
+    pub title: String,
+    pub email: String,
+    pub categories: String,
+    pub published: String,
+}
+
+#[get("/<id>")]
+pub async fn view_page(db: Db, user: Option<User>, id: i64) -> ApiResult<Html<String>> {
+    let thread = db
+        .run(move |conn| {
+            let sql = format!(
+                "SELECT title, users.email, categories, published
+                 FROM threads 
+                 INNER JOIN users
+                 ON threads.user_id = users.id
+                 WHERE threads.id = {};",
+                id,
+            );
+            let mut stmt = conn.prepare(&sql).unwrap();
+            stmt.query_row([], |row| {
+                Ok(ThreadData {
+                    title: row.get(0)?,
+                    email: row.get(1)?,
+                    categories: row.get(2)?,
+                    published: row.get(3)?,
+                })
+            })
+        })
+        .await?;
+
+    let comments = db
+        .run(move |conn| {
+            let sql = format!(
+                "SELECT users.email, comments.body, comments.published
+                FROM threads
+                INNER JOIN comments
+                ON threads.id = comments.thread_id
+                INNER JOIN users
+                ON users.id = comments.user_id
+                WHERE threads.id = {};",
+                id,
+            );
+            let mut stmt = conn.prepare(&sql).unwrap();
+            stmt.query_map([], |row| {
+                Ok(ThreadComment {
+                    email: row.get(0)?,
+                    body: row.get(1)?,
+                    published: row.get(2)?,
+                })
+            })
+            .unwrap()
+            .collect::<Result<Vec<_>, _>>()
+        })
+        .await?;
+
+    let template = template::ThreadView {
+        user,
+        thread,
+        comments,
+    };
+    Ok(Html(template.render_once()?))
+}
