@@ -4,9 +4,8 @@ Elixir is a reddit-like web application with the goals of being tiny, performant
 
 ## Deploy
 
-Rust is required. [rustup](https://rustup.rs/) is recommended.
-
 ```bash
+sudo pacman -S rust gcc git
 git clone https://github.com/knarkzel/elixir
 cd elixir/
 cargo run
