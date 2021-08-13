@@ -1,2 +1,11 @@
 [global.databases]
 main = { url = "database/main.sqlite" }
+
+[debug]
+port = 8000
+address = "0.0.0.0"
+
+[release]
+port = 80
+address = "0.0.0.0"
+secret_key = "6btCxhkhX2gXu1iN1IeFX1qiHcWZS9rGAtWKrayV884="
