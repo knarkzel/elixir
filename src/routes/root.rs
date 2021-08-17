@@ -14,7 +14,7 @@ pub async fn index_page(db: Db, user: Option<User>) -> ApiResult<Html<String>> {
         .run(|conn| {
             let mut stmt = conn
                 .prepare(
-                    "SELECT title, users.email, categories, published
+                    "SELECT title, users.email, categories, published, threads.id
                      FROM threads 
                      INNER JOIN users
                      ON threads.user_id = users.id;",
@@ -23,8 +23,8 @@ pub async fn index_page(db: Db, user: Option<User>) -> ApiResult<Html<String>> {
             stmt.query_map([], |row| {
                 let title: String = row.get(0)?;
                 let email: String = row.get(1)?;
-                let href = title.to_lowercase().split_whitespace().join("-");
-                let link = format!("/{}/{}", email, href);
+                let href: i64 = row.get(4)?;
+                let link = format!("/thread/{}", href);
                 Ok(ThreadListing {
                     title,
                     email,

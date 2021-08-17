@@ -5,7 +5,20 @@
   <body>
     <% include!("nav.stpl"); %>
     <main>
-      <h3>Thread</h3>
+      <h3><%= thread.title %></h3>
+      <p>By: <%= thread.email %></p>
+      <p>Published: <%= thread.published.split_whitespace().next().unwrap() %></p>
+      <% for category in thread.categories.split(",").map(str::trim).filter(|x| x.len() > 0) { %>
+        <a class="category" href="#">#<%= category %></a>
+      <% } %>
+      <div>
+        <% for comment in comments { %>
+          <div class="thread-listing">
+            <h5><%= comment.email %>, <%= comment.published %></h5>
+            <p><%= comment.body %></p>
+          </div>
+        <% } %>
+      </div>
     </main>
   </body>
 </html>
