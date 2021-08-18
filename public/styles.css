@@ -77,9 +77,9 @@ nav { float: right; }
 #form-middle input, textarea { width: 100%; margin: 0.25em 0; }
 
 #threads {
-    margin-top: 1em;
     display: grid;
-    grid-gap: 0.5em;
+    margin-top: 0.5em;
+    grid-gap: 0 1em;
     grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
 }
 #threads button { float: right; }
