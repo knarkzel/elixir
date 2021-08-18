@@ -64,27 +64,30 @@ nav { float: right; }
     margin: 0 auto; 
     max-width: 50em;
 }
-#nav { border-bottom: 2px solid black; }
+#nav a { color: black; }
 #nav { padding: 0.25em; }
 #nav > * { font-size: 1.5rem; }
-#nav a { color: black; }
+#nav { border-bottom: 2px solid black; }
 
 #form-middle {
     margin: 0 auto;
     max-width: 35em;
 }
-#form-middle input, textarea { width: 100%; margin: 0.25em 0; }
 #form-middle button { float: right; }
-
-.thread-listing {
-    padding: 0.5em;
-    background: #f8f9fa;
-}
+#form-middle input, textarea { width: 100%; margin: 0.25em 0; }
 
 #threads {
-    margin-top: 1em;
     display: grid;
     grid-gap: 0.5em;
     grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
 }
 #threads button { float: right; }
+
+.thread-listing {
+    padding: 0.5em;
+    background: #f8f9fa;
+    margin: 0.5em 0; 
+}
+
+#comment button { float: right; }
+#comment { margin-bottom: 2.75em; }

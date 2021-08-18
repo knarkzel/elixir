@@ -11,6 +11,15 @@
       <% for category in thread.categories.split(",").map(str::trim).filter(|x| x.len() > 0) { %>
         <a class="category" href="#">#<%= category %></a>
       <% } %>
+      <form id="comment" action=<%= format!("/comment/create/{}", thread.id) %> method="POST">
+        <div>
+          <label for="body"></label>
+          <textarea autocomplete="off" name="body" rows=10 required></textarea>
+        </div>
+        <div>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
       <div>
         <% for comment in comments { %>
           <div class="thread-listing">

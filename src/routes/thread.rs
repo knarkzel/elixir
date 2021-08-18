@@ -15,8 +15,8 @@ pub fn create_page(user: User) -> ApiResult<Html<String>> {
 
 #[post("/create", data = "<thread>")]
 pub async fn create(db: Db, user: User, thread: Form<Thread>) -> ApiResult<Redirect> {
-    let user_id = user.id();
     let time = Utc::now();
+    let user_id = user.id();
     let thread = thread.into_inner();
 
     // Create thread.
@@ -62,6 +62,7 @@ pub struct ThreadData {
     pub email: String,
     pub categories: String,
     pub published: String,
+    pub id: i64,
 }
 
 #[get("/<id>")]
@@ -83,6 +84,7 @@ pub async fn view_page(db: Db, user: Option<User>, id: i64) -> ApiResult<Html<St
                     email: row.get(1)?,
                     categories: row.get(2)?,
                     published: row.get(3)?,
+                    id,
                 })
             })
         })
