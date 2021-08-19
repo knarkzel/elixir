@@ -78,7 +78,6 @@ nav { float: right; }
 
 #threads {
     display: grid;
-    margin-top: 0.5em;
     grid-gap: 0 1em;
     grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
 }

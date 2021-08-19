@@ -2,6 +2,7 @@ pub mod error;
 pub mod migrations;
 pub mod routes;
 pub mod template;
+pub mod utils;
 
 pub use chrono::prelude::*;
 pub use itertools::Itertools;

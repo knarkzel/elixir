@@ -72,11 +72,12 @@ pub async fn view_page(db: Db, user: Option<User>, id: i64) -> ApiResult<Html<St
             );
             let mut stmt = conn.prepare(&sql).unwrap();
             stmt.query_row([], |row| {
+                let published: String = row.get(3)?;
                 Ok(Thread {
                     title: row.get(0)?,
                     email: row.get(1)?,
                     categories: row.get(2)?,
-                    published: row.get(3)?,
+                    published: utils::time_ago(&published),
                     id,
                 })
             })
@@ -97,10 +98,11 @@ pub async fn view_page(db: Db, user: Option<User>, id: i64) -> ApiResult<Html<St
             );
             let mut stmt = conn.prepare(&sql).unwrap();
             stmt.query_map([], |row| {
+                let published: String = row.get(2)?;
                 Ok(comment::Comment {
                     email: row.get(0)?,
                     body: row.get(1)?,
-                    published: row.get(2)?,
+                    published: utils::time_ago(&published),
                 })
             })
             .unwrap()

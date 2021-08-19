@@ -1,0 +1,6 @@
+<div class="thread-listing">
+  <p>
+    <a href="#"><%= comment.email %></a> <%= comment.published %>
+  </p>
+  <p><%= comment.body %></p>
+</div>

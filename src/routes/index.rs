@@ -13,11 +13,12 @@ pub async fn page(db: Db, user: Option<User>) -> ApiResult<Html<String>> {
                 )
                 .unwrap();
             stmt.query_map([], |row| {
+                let published: String = row.get(3)?;
                 Ok(thread::Thread {
                     title: row.get(0)?,
                     email: row.get(1)?,
                     categories: row.get(2)?,
-                    published: row.get(3)?,
+                    published: utils::time_ago(&published),
                     id: row.get(4)?,
                 })
             })

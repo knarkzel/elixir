@@ -9,7 +9,7 @@
       <form id="comment" action=<%= format!("/comment/create/{}", thread.id) %> method="POST">
         <div>
           <label for="body"></label>
-          <textarea autocomplete="off" name="body" rows=10 required></textarea>
+          <textarea autocomplete="off" name="body" rows=8 required></textarea>
         </div>
         <div>
           <button type="submit">Submit</button>
@@ -17,10 +17,7 @@
       </form>
       <div>
         <% for comment in comments { %>
-          <div class="thread-listing">
-            <h5><%= comment.email %>, <%= comment.published %></h5>
-            <p><%= comment.body %></p>
-          </div>
+          <% include!("comment_component.stpl"); %>
         <% } %>
       </div>
     </main>

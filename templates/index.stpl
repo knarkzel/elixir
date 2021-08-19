@@ -13,7 +13,7 @@
         <p>You need to login or create a user in order to create threads.</p>
       <% } %>
       <div id="threads">
-        <% for thread in &threads { %>
+        <% for thread in threads.iter().rev() { %>
           <div class="thread-listing"> 
             <% include!("thread_component.stpl"); %>
           </div>
