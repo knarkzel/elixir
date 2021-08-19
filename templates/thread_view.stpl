@@ -5,12 +5,7 @@
   <body>
     <% include!("nav.stpl"); %>
     <main>
-      <h3><%= thread.title %></h3>
-      <p>By: <%= thread.email %></p>
-      <p>Published: <%= thread.published.split_whitespace().next().unwrap() %></p>
-      <% for category in thread.categories.split(",").map(str::trim).filter(|x| x.len() > 0) { %>
-        <a class="category" href="#">#<%= category %></a>
-      <% } %>
+      <% include!("thread_component.stpl"); %>
       <form id="comment" action=<%= format!("/comment/create/{}", thread.id) %> method="POST">
         <div>
           <label for="body"></label>

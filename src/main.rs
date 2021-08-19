@@ -4,7 +4,6 @@ use elixir::*;
 async fn rocket() -> _ {
     color_backtrace::install();
     migrations::install().expect("Error when migrating");
-    
 
     let users = Users::open_sqlite(crate::URL)
         .await
@@ -15,21 +14,18 @@ async fn rocket() -> _ {
         .mount(
             "/",
             routes![
-                root::index_page,
-                root::register_page,
-                root::login_page,
-                root::register,
-                root::login,
+                index::page,
+                index::register_page,
+                index::login_page,
+                index::register,
+                index::login,
             ],
         )
         .mount(
             "/thread",
             routes![thread::create_page, thread::create, thread::view_page],
         )
-        .mount(
-            "/comment",
-            routes![comment::create],
-        )
+        .mount("/comment", routes![comment::create])
         .mount("/public", rocket::fs::FileServer::from("public"))
         .manage(users)
 }

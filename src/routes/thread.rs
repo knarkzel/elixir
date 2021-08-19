@@ -1,7 +1,16 @@
 use crate::*;
 
-#[derive(FromForm, Clone)]
+#[derive(Debug)]
 pub struct Thread {
+    pub title: String,
+    pub email: String,
+    pub categories: String,
+    pub published: String,
+    pub id: i64,
+}
+
+#[derive(FromForm, Clone)]
+pub struct ThreadForm {
     title: String,
     categories: String,
     body: String,
@@ -14,7 +23,7 @@ pub fn create_page(user: User) -> ApiResult<Html<String>> {
 }
 
 #[post("/create", data = "<thread>")]
-pub async fn create(db: Db, user: User, thread: Form<Thread>) -> ApiResult<Redirect> {
+pub async fn create(db: Db, user: User, thread: Form<ThreadForm>) -> ApiResult<Redirect> {
     let time = Utc::now();
     let user_id = user.id();
     let thread = thread.into_inner();
@@ -46,23 +55,7 @@ pub async fn create(db: Db, user: User, thread: Form<Thread>) -> ApiResult<Redir
     })
     .await?;
 
-    Ok(Redirect::to(uri!("/")))
-}
-
-#[derive(Debug)]
-pub struct ThreadComment {
-    pub email: String,
-    pub body: String,
-    pub published: String,
-}
-
-#[derive(Debug)]
-pub struct ThreadData {
-    pub title: String,
-    pub email: String,
-    pub categories: String,
-    pub published: String,
-    pub id: i64,
+    Ok(Redirect::to("/"))
 }
 
 #[get("/<id>")]
@@ -79,7 +72,7 @@ pub async fn view_page(db: Db, user: Option<User>, id: i64) -> ApiResult<Html<St
             );
             let mut stmt = conn.prepare(&sql).unwrap();
             stmt.query_row([], |row| {
-                Ok(ThreadData {
+                Ok(Thread {
                     title: row.get(0)?,
                     email: row.get(1)?,
                     categories: row.get(2)?,
@@ -104,7 +97,7 @@ pub async fn view_page(db: Db, user: Option<User>, id: i64) -> ApiResult<Html<St
             );
             let mut stmt = conn.prepare(&sql).unwrap();
             stmt.query_map([], |row| {
-                Ok(ThreadComment {
+                Ok(comment::Comment {
                     email: row.get(0)?,
                     body: row.get(1)?,
                     published: row.get(2)?,
@@ -120,5 +113,6 @@ pub async fn view_page(db: Db, user: Option<User>, id: i64) -> ApiResult<Html<St
         thread,
         comments,
     };
+
     Ok(Html(template.render_once()?))
 }

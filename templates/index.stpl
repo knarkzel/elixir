@@ -12,7 +12,13 @@
       <% } else { %>
         <p>You need to login or create a user in order to create threads.</p>
       <% } %>
-      <% include!("threads.stpl"); %>
+      <div id="threads">
+        <% for thread in &threads { %>
+          <div class="thread-listing"> 
+            <% include!("thread_component.stpl"); %>
+          </div>
+        <% } %>
+      </div>
     </main>
   </body>
 </html>

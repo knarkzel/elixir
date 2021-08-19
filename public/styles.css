@@ -27,8 +27,8 @@ header {
     margin-bottom: 0.5em;
 }
 
-a:hover { text-decoration: underline; color: #0242f2; }
 a { text-decoration: none; color: #0640e0; }
+a:hover { text-decoration: underline; color: black; }
 
 input, textarea, button {
     padding: 0.25em;
@@ -82,13 +82,9 @@ nav { float: right; }
     grid-gap: 0 1em;
     grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
 }
-#threads button { float: right; }
 
 .thread-listing {
     padding: 0.5em;
     background: #f8f9fa;
     margin: 0.5em 0; 
 }
-
-#comment button { float: right; }
-#comment { margin-bottom: 2.75em; }

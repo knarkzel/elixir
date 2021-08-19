@@ -1,3 +1,3 @@
-pub mod root;
-pub mod thread;
 pub mod comment;
+pub mod index;
+pub mod thread;

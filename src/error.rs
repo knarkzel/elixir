@@ -31,6 +31,7 @@ impl<'r, 'o: 'r> Responder<'r, 'o> for ApiError {
             context,
         };
         let body = template.render_once().unwrap();
+
         Response::build()
             .header(ContentType::HTML)
             .status(Status::InternalServerError)

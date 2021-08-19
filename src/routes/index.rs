@@ -1,15 +1,7 @@
 use crate::*;
 
-pub struct ThreadListing {
-    pub title: String,
-    pub email: String,
-    pub categories: String,
-    pub published: String,
-    pub link: String,
-}
-
 #[get("/")]
-pub async fn index_page(db: Db, user: Option<User>) -> ApiResult<Html<String>> {
+pub async fn page(db: Db, user: Option<User>) -> ApiResult<Html<String>> {
     let threads = db
         .run(|conn| {
             let mut stmt = conn
@@ -21,16 +13,12 @@ pub async fn index_page(db: Db, user: Option<User>) -> ApiResult<Html<String>> {
                 )
                 .unwrap();
             stmt.query_map([], |row| {
-                let title: String = row.get(0)?;
-                let email: String = row.get(1)?;
-                let href: i64 = row.get(4)?;
-                let link = format!("/thread/{}", href);
-                Ok(ThreadListing {
-                    title,
-                    email,
+                Ok(thread::Thread {
+                    title: row.get(0)?,
+                    email: row.get(1)?,
                     categories: row.get(2)?,
                     published: row.get(3)?,
-                    link,
+                    id: row.get(4)?,
                 })
             })
             .unwrap()
@@ -51,7 +39,7 @@ pub fn login_page() -> ApiResult<Html<String>> {
 #[post("/login", data = "<form>")]
 pub async fn login(mut auth: Auth<'_>, form: Form<Login>) -> ApiResult<Redirect> {
     auth.login(&form).await?;
-    Ok(Redirect::to(uri!("/")))
+    Ok(Redirect::to("/"))
 }
 
 #[get("/register")]
@@ -64,5 +52,5 @@ pub fn register_page() -> ApiResult<Html<String>> {
 pub async fn register(mut auth: Auth<'_>, form: Form<Signup>) -> ApiResult<Redirect> {
     auth.signup(&form).await?;
     auth.login(&form.into()).await?;
-    Ok(Redirect::to(uri!("/")))
+    Ok(Redirect::to("/"))
 }

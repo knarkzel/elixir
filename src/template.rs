@@ -12,7 +12,7 @@ pub struct Error {
 #[template(path = "index.stpl")]
 pub struct Index {
     pub user: Option<User>,
-    pub threads: Vec<root::ThreadListing>,
+    pub threads: Vec<thread::Thread>,
 }
 
 #[derive(TemplateOnce)]
@@ -37,6 +37,6 @@ pub struct ThreadCreate {
 #[template(path = "thread_view.stpl")]
 pub struct ThreadView {
     pub user: Option<User>,
-    pub thread: thread::ThreadData,
-    pub comments: Vec<thread::ThreadComment>,
+    pub thread: thread::Thread,
+    pub comments: Vec<comment::Comment>,
 }
