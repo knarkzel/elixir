@@ -6,7 +6,7 @@
     <% include!("nav.stpl"); %>
     <main>
       <% include!("thread_component.stpl"); %>
-      <p><%= comments[0].body %></p>
+      <p class="overflows"><%= comments[0].body %></p>
       <form id="comment" action=<%= format!("/comment/create/{}", thread.id) %> method="POST">
         <div>
           <label for="body"></label>
