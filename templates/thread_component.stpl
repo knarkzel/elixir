@@ -1,9 +1,7 @@
 <h3>
-  <a href=<%= format!("/thread/{}", thread.id) %>>
-    <%= thread.title %>
-  </a>
+  <a href=<%= format!("/thread/{}", thread.id) %>><%= thread.title %></a>
+  <% for category in thread.categories.split(",").map(str::trim).filter(|x| x.len() > 0) { %>
+    <a class="category" href="#"><%= category %></a>
+  <% } %>
 </h3>
 <p>by <a href="#"><%= thread.email %></a> <%= thread.published %></p>
-<% for category in thread.categories.split(",").map(str::trim).filter(|x| x.len() > 0) { %>
-  <a class="category" href="#">#<%= category %></a>
-<% } %>

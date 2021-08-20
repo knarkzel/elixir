@@ -84,6 +84,15 @@ nav { float: right; }
 
 .thread-listing {
     padding: 0.5em;
-    background: #f8f9fa;
     margin: 0.5em 0; 
+    background: #f8f9fa;
+}
+
+.category {
+    color: black;
+    padding: 0.1em;
+    background: #fffcd7;
+    text-decoration: none;
+    border: 1px solid black;
+    font-size: 75%;
 }

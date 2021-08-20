@@ -6,6 +6,7 @@
     <% include!("nav.stpl"); %>
     <main>
       <% include!("thread_component.stpl"); %>
+      <p><%= comments[0].body %></p>
       <form id="comment" action=<%= format!("/comment/create/{}", thread.id) %> method="POST">
         <div>
           <label for="body"></label>
@@ -16,7 +17,7 @@
         </div>
       </form>
       <div>
-        <% for comment in comments { %>
+        <% for comment in comments[1..].iter().rev() { %>
           <% include!("comment_component.stpl"); %>
         <% } %>
       </div>

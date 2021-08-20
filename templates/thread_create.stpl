@@ -12,7 +12,7 @@
         </div>
         <div>
           <label for="categories">Categories (comma separated): </label>
-          <input autocomplete="off" type="text" name="categories" required>
+          <input autocomplete="off" type="text" name="categories">
         </div>
         <div>
           <label for="body">Body (supports markdown): </label>
