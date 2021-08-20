@@ -8,15 +8,15 @@
       <form id="form-middle" action="/thread/create" method="POST">
         <div>
           <label for="title">Title: </label>
-          <input autocomplete="off" type="text" name="title" required autofocus>
+          <input maxlength="150" autocomplete="off" type="text" name="title" required autofocus>
         </div>
         <div>
           <label for="categories">Categories (comma separated): </label>
-          <input autocomplete="off" type="text" name="categories">
+          <input maxlength="50" autocomplete="off" type="text" name="categories">
         </div>
         <div>
           <label for="body">Body (supports markdown): </label>
-          <textarea autocomplete="off" name="body" rows=10 required></textarea>
+          <textarea autocomplete="off" name="body" rows=8></textarea>
         </div>
         <button type="submit">Create new thread</button>
       </form>

@@ -8,7 +8,7 @@
       <form id="form-middle" action="/register" method="POST">
         <div>
           <label for="email">Username: </label>
-          <input autocomplete="off" type="text" name="email" required autofocus>
+          <input maxlength="50" autocomplete="off" type="text" name="email" required autofocus>
         </div>
         <div>
           <label for="password">Password: </label>
