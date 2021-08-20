@@ -76,11 +76,7 @@ nav { float: right; }
 #form-middle button { float: right; }
 #form-middle input, textarea { width: 100%; margin: 0.25em 0; }
 
-#threads {
-    display: grid;
-    grid-gap: 0 1em;
-    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-}
+.overflows { word-wrap: break-word; }
 
 .thread-listing {
     padding: 0.5em;
