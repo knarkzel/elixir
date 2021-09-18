@@ -1,7 +1,6 @@
-* :not(ul, ol, li) {
+* :not(ul, ol, li, tr, th, td) {
     margin: 0;
     padding: 0;
-    font-family: inherit;
 }
 
 ul, ol {
@@ -9,13 +8,7 @@ ul, ol {
     padding: 0 1em;
 }
 
-body {
-    margin: 0 1em;
-    line-height: 1.5;
-    font-family: "Helvetica", "Arial", sans-serif;
-}
-
-:not(pre) code {
+:not(pre) > code {
     padding: 0.25em;
 }
 
@@ -36,9 +29,6 @@ header {
     background-color: white;
     margin-bottom: 0.5em;
 }
-
-a { text-decoration: none; color: #0640e0; }
-a:hover { text-decoration: underline; color: black; }
 
 input, textarea, button {
     padding: 0.25em;
@@ -82,9 +72,7 @@ nav { float: right; }
 .overflows { word-wrap: break-word; }
 
 .thread-listing {
-    padding: 0.5em;
-    margin: 0.5em 0; 
-    background: #f8f9fa;
+    margin: 1em 0; 
 }
 
 .category {
