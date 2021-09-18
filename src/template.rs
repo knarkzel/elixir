@@ -34,7 +34,7 @@ pub struct ThreadCreate {
 }
 
 #[derive(TemplateOnce)]
-#[template(path = "thread_view.stpl")]
+#[template(path = "thread_view.stpl", escape = false)]
 pub struct ThreadView {
     pub user: Option<User>,
     pub thread: thread::Thread,

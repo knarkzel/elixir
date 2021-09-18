@@ -1,7 +1,12 @@
-* {
+* :not(ul, ol, li) {
     margin: 0;
     padding: 0;
     font-family: inherit;
+}
+
+ul, ol {
+    margin: 0 1em;
+    padding: 0 1em;
 }
 
 body {
@@ -10,14 +15,19 @@ body {
     font-family: "Helvetica", "Arial", sans-serif;
 }
 
-pre { 
-    white-space: pre-line;
-    background-color: #eee;
+:not(pre) code {
+    padding: 0.25em;
+}
+
+pre, code {
+    color: #dcdcdc;
+    background: #1e1e1e;
+    font-family: monospace;
 }
 
 blockquote, pre {
+    margin: 0.25em 0;
     padding: 0.5em;
-    border-left: 2px solid black;
 }
 
 header {
@@ -49,13 +59,6 @@ button:hover {
 
 textarea {
   resize: none;
-}
-
-code {
-    color: #bf616a;
-    border-radius: 3px;
-    padding: .25em .5em;
-    background-color: #f9f9f9;
 }
 
 nav { float: right; }
