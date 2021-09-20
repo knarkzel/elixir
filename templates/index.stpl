@@ -5,13 +5,6 @@
   <body>
     <% include!("nav.stpl"); %>
     <main>
-      <% if user.is_some() { %>
-        <a href="/thread/create">
-          <button>Create new thread</button>
-        </a>
-      <% } else { %>
-        <p>You need to login or create a user in order to create threads.</p>
-      <% } %>
       <div id="threads">
         <% for thread in threads.iter().rev() { %>
           <div class="thread-listing"> 

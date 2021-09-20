@@ -1,12 +1,15 @@
 <header>
   <div id="nav">
-    <a href="/">Elixir</a>
+    <a href="/">Home</a>
+    <% if user.is_some() { %>
+      <a href="/thread/create">Thread</a>
+    <% } %>
+    <a href="/search">Search</a>
     <nav>
       <% if user.is_some() { %>
         <a href="#"><%= user.as_ref().unwrap().email() %></a>
       <% } else { %>
         <a href="/login">Login</a>
-        / 
         <a href="/register">Register</a>
       <% } %>
     </nav>

@@ -71,7 +71,7 @@ nav { float: right; }
 
 .overflows { word-wrap: break-word; }
 
-.thread-listing {
+.thread-listing:not(:first-child) {
     margin: 1em 0; 
 }
 
@@ -82,4 +82,20 @@ nav { float: right; }
     text-decoration: none;
     border: 1px solid black;
     font-size: 75%;
+}
+
+#nav > a:not(:first-child) {
+    margin-left: 0.1em;
+}
+
+#nav > a:not(:first-child)::before {
+    padding-left: 0.2em;
+    padding-right: 0.4em;
+    content: "|";
+}
+
+nav > a:not(:first-child)::before {
+    padding-left: 0.2em;
+    padding-right: 0.4em;
+    content: "|";
 }
