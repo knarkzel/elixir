@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+body {
+  overflow-y: scroll;
+}
+
 ul, ol {
     margin: 0 1em;
     padding: 0 1em;
@@ -13,8 +17,8 @@ ul, ol {
 }
 
 pre, code {
-    color: #dcdcdc;
-    background: #1e1e1e;
+    color: #333;
+    background: #f5f2f0;
     font-family: monospace;
 }
 
@@ -70,16 +74,16 @@ nav { float: right; }
 
 #nav, main { 
     margin: 0 auto; 
-    max-width: 50em;
+    max-width: 60em;
 }
-#nav a { color: black; }
+#nav a { color: #333; }
 #nav { padding: 0.25em; }
 #nav > * { font-size: 1.5rem; }
 #nav { border-bottom: 2px solid black; }
 
 #form-middle {
     margin: 0 auto;
-    max-width: 35em;
+    max-width: 40em;
 }
 #form-middle button { float: right; }
 #form-middle input, textarea { width: 100%; margin: 0.25em 0; }
@@ -90,8 +94,12 @@ nav { float: right; }
     margin: 1em 0; 
 }
 
+#comments > .thread-listing:first-child {
+    margin-top: 1em;
+}
+
 .category {
-    color: black;
+    color: #333;
     padding: 0.1em;
     background: #fffcd7;
     text-decoration: none;

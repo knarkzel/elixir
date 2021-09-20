@@ -26,7 +26,7 @@
           <% } %>
         </div>
       </form>
-      <div>
+      <div id="comments">
         <% for comment in comments[1..].iter().rev() { %>
           <% include!("comment_component.stpl"); %>
         <% } %>
