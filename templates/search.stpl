@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <% include!("head.stpl"); %>
+  </head>
+  <body>
+    <% include!("nav.stpl"); %>
+    <main>
+      <form id="form-middle" action="/search" method="POST">
+        <div>
+          <label for="query">Query: </label>
+          <input autocomplete="off" type="text" name="query" required autofocus>
+        </div>
+        <button type="submit">Search</button>
+      </form>
+    </main>
+  </body>
+</html>

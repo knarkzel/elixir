@@ -25,6 +25,7 @@ async fn rocket() -> _ {
             "/thread",
             routes![thread::create_page, thread::create, thread::view_page],
         )
+        .mount("/search", routes![search::page, search::view_query])
         .mount("/comment", routes![comment::create])
         .mount("/public", rocket::fs::FileServer::from("public"))
         .manage(users)

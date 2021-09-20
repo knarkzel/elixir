@@ -16,6 +16,12 @@ pub struct Index {
 }
 
 #[derive(TemplateOnce)]
+#[template(path = "search.stpl")]
+pub struct Search {
+    pub user: Option<User>,
+}
+
+#[derive(TemplateOnce)]
 #[template(path = "register.stpl")]
 pub struct Register {
     pub user: Option<User>,
