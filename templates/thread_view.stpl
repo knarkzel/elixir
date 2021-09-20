@@ -12,10 +12,18 @@
       <form id="comment" action=<%= format!("/comment/create/{}", thread.id) %> method="POST">
         <div>
           <label for="body"></label>
-          <textarea autocomplete="off" name="body" rows=8 required></textarea>
+          <% if user.is_some() { %>
+            <textarea autocomplete="off" name="body" rows=8 required></textarea>
+          <% } else { %>
+            <textarea autocomplete="off" name="body" rows=8 disabled required></textarea>
+          <% } %>
         </div>
         <div>
-          <button type="submit">Submit</button>
+          <% if user.is_some() { %>
+            <button type="submit">Submit</button>
+          <% } else { %>
+            <button type="submit" disabled>Submit</button>
+          <% } %>
         </div>
       </form>
       <div>

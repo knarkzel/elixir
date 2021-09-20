@@ -47,6 +47,15 @@ button:hover {
     cursor: pointer;
 }
 
+button:disabled {
+    background: rgba(239, 239, 239, 0.3);
+    color: rgba(239, 239, 239, 0.0);
+}
+
+button:disabled:hover {
+    cursor: unset;
+}
+
 textarea {
   resize: none;
 }
