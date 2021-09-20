@@ -34,10 +34,14 @@ header {
     margin-bottom: 0.5em;
 }
 
-input, textarea, button {
+input, textarea, button, select {
     padding: 0.25em;
     font-size: inherit;
     border: 1px solid black;
+}
+
+select {
+    background: white;
 }
 
 button {

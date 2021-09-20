@@ -7,6 +7,13 @@
     <main>
       <form id="form-middle" action="/search" method="POST">
         <div>
+          <label for="filter">Filter: </label>
+          <select id="filter" name="filter">
+            <option value="threads">Threads</option>
+            <option value="comments">Comments</option>
+          </select>
+        </div>
+        <div>
           <label for="query">Query: </label>
           <input autocomplete="off" type="text" name="query" required autofocus>
         </div>
