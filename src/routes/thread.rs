@@ -88,7 +88,7 @@ pub async fn view_page(db: Db, user: Option<User>, id: i64) -> ApiResult<Html<St
     let mut comments = db
         .run(move |conn| {
             let sql = format!(
-                "SELECT users.email, comments.body, comments.published
+                "SELECT users.email, comments.body, comments.published, comments.id
                 FROM threads
                 INNER JOIN comments
                 ON threads.id = comments.thread_id
@@ -104,6 +104,7 @@ pub async fn view_page(db: Db, user: Option<User>, id: i64) -> ApiResult<Html<St
                     email: row.get(0)?,
                     body: row.get(1)?,
                     published: utils::time_ago(&published),
+                    id: row.get(3)?,
                 })
             })
             .unwrap()

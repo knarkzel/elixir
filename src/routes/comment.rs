@@ -5,6 +5,7 @@ pub struct Comment {
     pub email: String,
     pub body: String,
     pub published: String,
+    pub id: i64,
 }
 
 #[derive(FromForm, Clone)]
