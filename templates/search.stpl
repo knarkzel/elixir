@@ -11,6 +11,7 @@
           <select id="filter" name="filter">
             <option value="threads">threads</option>
             <option value="comments">comments</option>
+            <option value="categories">categories</option>
           </select>
         </div>
         <div>
