@@ -1,4 +1,5 @@
 use crate::*;
+use pulldown_cmark::{html, Options, Parser};
 
 #[derive(Debug)]
 pub struct Comment {
@@ -6,6 +7,15 @@ pub struct Comment {
     pub body: String,
     pub published: String,
     pub id: i64,
+}
+
+impl Comment {
+    pub fn parse_markdown(&mut self) {
+        let mut buffer = String::new();
+        let parser = Parser::new_ext(&self.body, Options::all());
+        html::push_html(&mut buffer, parser);
+        self.body = buffer;
+    }
 }
 
 #[derive(FromForm, Clone)]

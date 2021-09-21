@@ -1,7 +1,10 @@
 use crate::*;
+use crate::comment::Comment;
+use crate::thread::Thread;
 
 #[derive(FromForm, Clone)]
 pub struct QueryForm {
+    filter: String,
     query: String,
 }
 
@@ -11,8 +14,7 @@ pub async fn page(user: Option<User>) -> ApiResult<Html<String>> {
     Ok(Html(template.render_once()?))
 }
 
-#[post("/", data = "<query>")]
-pub async fn view_query(db: Db, user: Option<User>, query: Form<QueryForm>) -> ApiResult<Html<String>> {
+pub async fn query_threads(db: Db, query: Form<QueryForm>) -> ApiResult<Vec<Thread>> {
     let threads = db
         .run(|conn| {
             let sql = format!(
@@ -38,7 +40,52 @@ pub async fn view_query(db: Db, user: Option<User>, query: Form<QueryForm>) -> A
             .collect::<Result<Vec<_>, _>>()
         })
         .await?;
+    Ok(threads)
+}
 
-    let template = template::Index { user, threads };
-    Ok(Html(template.render_once()?))
+pub async fn query_comments(db: Db, query: Form<QueryForm>) -> ApiResult<Vec<Comment>> {
+    let mut comments = db
+        .run(move |conn| {
+            let sql = format!(
+                "SELECT users.email, comments.body, comments.published, comments.id, comments.thread_id
+                FROM comments
+                INNER JOIN users
+                ON users.id = comments.user_id
+                WHERE comments.body like \"%{}%\";",
+                query.into_inner().query,
+            );
+            let mut stmt = conn.prepare(&sql).unwrap();
+            stmt.query_map([], |row| {
+                let published: String = row.get(2)?;
+                Ok(comment::Comment {
+                    email: row.get(0)?,
+                    body: row.get(1)?,
+                    published: utils::time_ago(&published),
+                    id: row.get(3)?,
+                })
+            })
+            .unwrap()
+            .collect::<Result<Vec<_>, _>>()
+        })
+        .await?;
+    comments.iter_mut().for_each(Comment::parse_markdown);
+
+    Ok(comments)
+}
+
+#[post("/", data = "<query>")]
+pub async fn view_query(db: Db, user: Option<User>, query: Form<QueryForm>) -> ApiResult<Html<String>> {
+    let filter = query.clone().filter;
+    match filter.as_str() {
+        "comments" => {
+            let comments = query_comments(db, query).await?;
+            let template = template::SearchComments { user, comments };
+            Ok(Html(template.render_once()?))
+        }
+        "threads" | _ => {
+            let threads = query_threads(db, query).await?;
+            let template = template::Index { user, threads };
+            Ok(Html(template.render_once()?))
+        }
+    }
 }

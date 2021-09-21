@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <% include!("head.stpl"); %>
+  </head>
+  <body>
+    <% include!("nav.stpl"); %>
+    <main>
+        <% for comment in comments.iter().rev() { %>
+          <% include!("comment_component.stpl"); %>
+        <% } %>
+    </main>
+  </body>
+</html>

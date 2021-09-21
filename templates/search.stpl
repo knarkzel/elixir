@@ -9,8 +9,8 @@
         <div>
           <label for="filter">Filter: </label>
           <select id="filter" name="filter">
-            <option value="threads">Threads</option>
-            <option value="comments">Comments</option>
+            <option value="threads">threads</option>
+            <option value="comments">comments</option>
           </select>
         </div>
         <div>

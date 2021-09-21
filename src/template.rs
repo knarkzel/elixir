@@ -22,6 +22,13 @@ pub struct Search {
 }
 
 #[derive(TemplateOnce)]
+#[template(path = "search_comments.stpl", escape = false)]
+pub struct SearchComments {
+    pub user: Option<User>,
+    pub comments: Vec<comment::Comment>,
+}
+
+#[derive(TemplateOnce)]
 #[template(path = "register.stpl")]
 pub struct Register {
     pub user: Option<User>,

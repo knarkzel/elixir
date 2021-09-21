@@ -1,5 +1,4 @@
-use crate::*;
-use pulldown_cmark::{html, Options, Parser};
+use crate::{*, comment::Comment};
 
 #[derive(Debug)]
 pub struct Thread {
@@ -111,14 +110,7 @@ pub async fn view_page(db: Db, user: Option<User>, id: i64) -> ApiResult<Html<St
             .collect::<Result<Vec<_>, _>>()
         })
         .await?;
-
-    // transform for each comments -> comment.body with markdown
-    for comment in &mut comments {
-        let mut buffer = String::new();
-        let parser = Parser::new_ext(&comment.body, Options::all());
-        html::push_html(&mut buffer, parser);
-        comment.body = buffer;
-    }
+    comments.iter_mut().for_each(Comment::parse_markdown);
 
     let template = template::ThreadView {
         user,
