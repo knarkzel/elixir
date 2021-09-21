@@ -14,6 +14,8 @@ pub enum ApiError {
     DbError(#[from] rusqlite::Error),
     #[error("Authentication failed")]
     AuthError(#[from] rocket_auth::Error),
+    #[error("Invalid user input provided")]
+    InvalidInput,
 }
 
 impl<'r, 'o: 'r> Responder<'r, 'o> for ApiError {
@@ -24,6 +26,7 @@ impl<'r, 'o: 'r> Responder<'r, 'o> for ApiError {
             ApiError::TemplateError(e) => e.to_string(),
             ApiError::DbError(e) => e.to_string(),
             ApiError::AuthError(e) => e.to_string(),
+            ApiError::InvalidInput => String::from("Bad input detected!"),
         };
         let template = template::Error {
             cause,

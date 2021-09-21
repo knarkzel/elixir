@@ -34,8 +34,11 @@ pub async fn create(
     let time = Utc::now();
     let user_id = user.id();
 
-    // Create comment.
+    // Create comment
     let (body, published) = { (comment.into_inner().body, time.to_string()) };
+    // Clean input
+    let body = clean(&body);
+    // Insert into database
     db.run(move |conn| {
         conn.execute(
             "INSERT INTO comments (thread_id, user_id, body, published) VALUES (?1, ?2, ?3, ?4)",

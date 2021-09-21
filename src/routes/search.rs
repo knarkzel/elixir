@@ -105,7 +105,8 @@ pub async fn query_categories(db: Db, query: Form<QueryForm>) -> ApiResult<Vec<T
 
 #[post("/", data = "<query>")]
 pub async fn view_query(db: Db, user: Option<User>, query: Form<QueryForm>) -> ApiResult<Html<String>> {
-    let filter = query.clone().filter;
+    // Clean input
+    let filter = clean(&query.clone().filter);
     match filter.as_str() {
         "comments" => {
             let comments = query_comments(db, query).await?;
@@ -124,4 +125,3 @@ pub async fn view_query(db: Db, user: Option<User>, query: Form<QueryForm>) -> A
         }
     }
 }
-

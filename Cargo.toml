@@ -13,6 +13,7 @@ rusqlite = { version = "0.25.3", features = ["bundled"] }
 color-backtrace = { version = "0.5.1", default-features = false }
 rocket_sync_db_pools = { version = "0.1.0-rc.1", features = ["sqlite_pool"] }
 pulldown-cmark = { version = "0.8.0", features = ["simd"] }
+ammonia = "3.1.2"
 
 [dependencies.rocket_auth]
 git = "https://github.com/knarkzel/rocket_auth"

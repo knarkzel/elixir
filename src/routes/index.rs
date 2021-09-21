@@ -39,6 +39,9 @@ pub fn login_page() -> ApiResult<Html<String>> {
 
 #[post("/login", data = "<form>")]
 pub async fn login(mut auth: Auth<'_>, form: Form<Login>) -> ApiResult<Redirect> {
+    if form.email.chars().any(|c| !c.is_ascii_alphanumeric()) {
+        return Err(ApiError::InvalidInput);
+    }
     auth.login(&form).await?;
     Ok(Redirect::to("/"))
 }
@@ -51,6 +54,9 @@ pub fn register_page() -> ApiResult<Html<String>> {
 
 #[post("/register", data = "<form>")]
 pub async fn register(mut auth: Auth<'_>, form: Form<Signup>) -> ApiResult<Redirect> {
+    if form.email.chars().any(|c| !c.is_ascii_alphanumeric()) {
+        return Err(ApiError::InvalidInput);
+    }
     auth.signup(&form).await?;
     auth.login(&form.into()).await?;
     Ok(Redirect::to("/"))

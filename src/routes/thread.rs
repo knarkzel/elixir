@@ -28,11 +28,18 @@ pub async fn create(db: Db, user: User, thread: Form<ThreadForm>) -> ApiResult<R
     let user_id = user.id();
     let thread = thread.into_inner();
 
-    // Create thread.
+    // Create thread
     let (title, categories, published) = {
         let thread = thread.clone();
         (thread.title, thread.categories, time.to_string())
     };
+    // Clean input
+    let title = clean(&title);
+    let categories = clean(&categories);
+    if title.is_empty() {
+        return Err(ApiError::InvalidInput);
+    }
+    // Insert into database
     db.run(move |conn| {
         conn.execute(
             "INSERT INTO threads (title, categories, user_id, published) VALUES (?1, ?2, ?3, ?4)",
@@ -41,12 +48,15 @@ pub async fn create(db: Db, user: User, thread: Form<ThreadForm>) -> ApiResult<R
     })
     .await?;
 
-    // Create comment.
+    // Create comment
     let thread_id = db.run(|conn| conn.last_insert_rowid()).await;
     let (body, published) = {
         let thread = thread.clone();
         (thread.body, time.to_string())
     };
+    // Clean input
+    let body = clean(&body);
+    // Insert into database
     db.run(move |conn| {
         conn.execute(
             "INSERT INTO comments (thread_id, user_id, body, published) VALUES (?1, ?2, ?3, ?4)",
