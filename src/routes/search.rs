@@ -62,6 +62,7 @@ pub async fn query_comments(db: Db, query: Form<QueryForm>) -> ApiResult<Vec<Com
                     body: row.get(1)?,
                     published: utils::time_ago(&published),
                     id: row.get(3)?,
+                    thread_id: row.get(4)?,
                 })
             })
             .unwrap()

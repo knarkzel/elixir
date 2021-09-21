@@ -1,6 +1,7 @@
 <div id="<%= comment.id %>" class="thread-listing">
   <p>
-    <a href="#"><%= comment.email %></a> <%= comment.published %>
+    <a href="#"><%= comment.email %></a> <%= comment.published %> | 
+    <a href="/thread/<%= comment.thread_id %>#<%= comment.id %>">link</a>
   </p>
   <div class="overflows"><%= comment.body %></div>
 </div>

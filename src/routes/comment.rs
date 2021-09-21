@@ -7,6 +7,7 @@ pub struct Comment {
     pub body: String,
     pub published: String,
     pub id: i64,
+    pub thread_id: i64,
 }
 
 impl Comment {
