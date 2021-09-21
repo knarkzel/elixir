@@ -104,9 +104,13 @@ pub async fn query_categories(db: Db, query: Form<QueryForm>) -> ApiResult<Vec<T
 }
 
 #[post("/", data = "<query>")]
-pub async fn view_query(db: Db, user: Option<User>, query: Form<QueryForm>) -> ApiResult<Html<String>> {
+pub async fn view_query(db: Db, user: Option<User>, mut query: Form<QueryForm>) -> ApiResult<Html<String>> {
     // Clean input
-    let filter = clean(&query.clone().filter);
+    query.query = clean(&query.query);
+    if query.query.is_empty() {
+        return Err(ApiError::InvalidInput);
+    }
+    let filter = &query.filter;
     match filter.as_str() {
         "comments" => {
             let comments = query_comments(db, query).await?;
