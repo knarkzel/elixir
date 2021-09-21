@@ -102,13 +102,22 @@ nav { float: right; }
     margin-top: 1em;
 }
 
+.inline {
+    display: inline;
+}
+
 .category {
     color: #333;
     padding: 0.1em;
-    background: #fffcd7;
-    text-decoration: none;
-    border: 1px solid black;
     font-size: 75%;
+    font-weight: bold;
+    background: #fffcd7;
+    border: 1px solid black;
+}
+
+.category:hover {
+    background: #fffcd7;
+    text-decoration: underline;
 }
 
 #nav > a:not(:first-child) {

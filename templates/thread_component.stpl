@@ -1,7 +1,11 @@
 <h3>
   <a class="overflows" href=<%= format!("/thread/{}", thread.id) %>><%= thread.title %></a>
   <% for category in thread.categories.split(",").map(str::trim).filter(|x| x.len() > 0) { %>
-    <a class="category overflows" href="#"><%= category %></a>
+    <form method="post" action="/search" class="inline">
+      <input type="hidden" name="filter" value="categories">
+      <input type="hidden" name="query" value="<%= category %>">
+      <button class="category" type="submit"><%= category %></button>
+    </form>
   <% } %>
 </h3>
 <p>by <a class="overflows" href="#"><%= thread.email %></a> <%= thread.published %></p>
