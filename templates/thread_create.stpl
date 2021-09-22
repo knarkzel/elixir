@@ -16,7 +16,7 @@
         </div>
         <div>
           <label for="body">Body (supports markdown): </label>
-          <textarea autocomplete="off" name="body" rows=8></textarea>
+          <textarea autocomplete="off" name="body" rows=8 required></textarea>
         </div>
         <button type="submit">Create new thread</button>
       </form>

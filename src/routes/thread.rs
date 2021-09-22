@@ -56,6 +56,9 @@ pub async fn create(db: Db, user: User, thread: Form<ThreadForm>) -> ApiResult<R
     };
     // Clean input
     let body = clean(&body);
+    if body.is_empty() {
+        return Err(ApiError::InvalidInput);
+    }
     // Insert into database
     db.run(move |conn| {
         conn.execute(
