@@ -21,5 +21,20 @@ pub fn install() -> rusqlite::Result<()> {
         [],
     )?;
 
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS threads_index ON threads(categories, title);",
+        [],
+    )?;
+
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS comments_index ON comments(body);",
+        [],
+    )?;
+
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS users_index ON users(email);",
+        [],
+    )?;
+
     Ok(())
 }

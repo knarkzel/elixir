@@ -38,6 +38,9 @@ pub async fn create(
     let (body, published) = { (comment.into_inner().body, time.to_string()) };
     // Clean input
     let body = clean(&body);
+    if body.is_empty() {
+        return Err(ApiError::InvalidInput);
+    }
     // Insert into database
     db.run(move |conn| {
         conn.execute(
