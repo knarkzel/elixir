@@ -7,7 +7,6 @@ edition = "2018"
 lto = true
 opt-level = "s"
 panic = "abort"
-strip = true
 
 [dependencies]
 tokio = "1.10.0"
