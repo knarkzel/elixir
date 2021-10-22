@@ -1,7 +1,15 @@
+cargo-features = ["strip"]
+
 [package]
 name = "elixir"
 version = "0.1.0"
 edition = "2018"
+
+[profile.release]
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true
 
 [dependencies]
 tokio = "1.10.0"
