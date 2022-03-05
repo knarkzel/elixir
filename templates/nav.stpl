@@ -1,10 +1,10 @@
 <header>
   <div id="nav">
     <a href="/">Home</a>
+    <a href="/search">Search</a>
     <% if user.is_some() { %>
       <a href="/thread/create">Thread</a>
     <% } %>
-    <a href="/search">Search</a>
     <nav>
       <% if user.is_some() { %>
         <a href="#"><%= user.as_ref().unwrap().email() %></a>

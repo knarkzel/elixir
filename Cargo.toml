@@ -1,24 +1,23 @@
 [package]
 name = "elixir"
 version = "0.1.0"
-edition = "2018"
+edition = "2021"
 
 [profile.release]
 lto = true
-opt-level = "s"
-panic = "abort"
+strip = true
 
 [dependencies]
 tokio = "1.10.0"
 chrono = "0.4.19"
+ammonia = "3.1.2"
 itertools = "0.10.1"
 thiserror = "1.0.26"
 rocket = "0.5.0-rc.1"
 rusqlite = { version = "0.25.3", features = ["bundled"] }
+pulldown-cmark = { version = "0.8.0", features = ["simd"] }
 color-backtrace = { version = "0.5.1", default-features = false }
 rocket_sync_db_pools = { version = "0.1.0-rc.1", features = ["sqlite_pool"] }
-pulldown-cmark = { version = "0.8.0", features = ["simd"] }
-ammonia = "3.1.2"
 
 [dependencies.rocket_auth]
 git = "https://github.com/knarkzel/rocket_auth"
