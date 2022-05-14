@@ -1,6 +1,6 @@
 # Elixir
 
-Elixir is a reddit-like web application with the goals of being tiny, performant and easy to set up.
+Elixir is a hacker-news like web application with the goals of being tiny, performant and easy to set up.
 
 ## Deploy
 
