@@ -4,7 +4,7 @@ pub fn time_ago(published: &str) -> String {
     let previous = published.parse::<DateTime<Utc>>().unwrap();
     let current = Utc::now();
     let delta = current.signed_duration_since(previous);
-    
+
     let days = delta.num_days();
     if days == 0 {
         let hours = delta.num_hours();

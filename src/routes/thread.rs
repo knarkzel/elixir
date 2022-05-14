@@ -1,4 +1,4 @@
-use crate::{*, comment::Comment};
+use crate::{comment::Comment, *};
 
 #[derive(Debug)]
 pub struct Thread {

@@ -1,6 +1,6 @@
-use crate::*;
 use crate::comment::Comment;
 use crate::thread::Thread;
+use crate::*;
 
 #[derive(FromForm, Clone)]
 pub struct QueryForm {
@@ -104,7 +104,11 @@ pub async fn query_categories(db: Db, query: Form<QueryForm>) -> ApiResult<Vec<T
 }
 
 #[post("/", data = "<query>")]
-pub async fn view_query(db: Db, user: Option<User>, mut query: Form<QueryForm>) -> ApiResult<Html<String>> {
+pub async fn view_query(
+    db: Db,
+    user: Option<User>,
+    mut query: Form<QueryForm>,
+) -> ApiResult<Html<String>> {
     // Clean input
     query.query = clean(&query.query);
     if query.query.is_empty() {

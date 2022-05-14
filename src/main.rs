@@ -2,7 +2,6 @@ use elixir::*;
 
 #[launch]
 async fn rocket() -> _ {
-    color_backtrace::install();
     migrations::install().expect("Error when migrating");
 
     let users = Users::open_sqlite(crate::URL)

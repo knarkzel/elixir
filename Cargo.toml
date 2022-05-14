@@ -4,24 +4,15 @@ version = "0.1.0"
 edition = "2021"
 include = ["src/**/*", "README.md"]
 
-[profile.release]
-lto = true
-strip = true
-
 [dependencies]
-tokio = "1.10.0"
-chrono = "0.4.19"
-ammonia = "3.1.2"
-itertools = "0.10.1"
-thiserror = "1.0.26"
+tokio = "1.10"
+chrono = "0.4"
+ammonia = "3.1"
+thiserror = "1.0"
 rocket = "0.5.0-rc.1"
-rusqlite = { version = "0.25.3", features = ["bundled"] }
-pulldown-cmark = { version = "0.8.0", features = ["simd"] }
-color-backtrace = { version = "0.5.1", default-features = false }
+rusqlite = { version = "0.25", features = ["bundled"] }
+pulldown-cmark = { version = "0.8", features = ["simd"] }
 rocket_sync_db_pools = { version = "0.1.0-rc.1", features = ["sqlite_pool"] }
+sailfish = { git = "https://github.com/rust-sailfish/sailfish", rev = "afcca6d" }
+rocket_auth = { git = "https://github.com/knarkzel/rocket_auth" }
 
-[dependencies.rocket_auth]
-git = "https://github.com/knarkzel/rocket_auth"
-
-[dependencies.sailfish]
-git = "https://github.com/knarkzel/sailfish"
