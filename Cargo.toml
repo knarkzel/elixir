@@ -2,6 +2,7 @@
 name = "elixir"
 version = "0.1.0"
 edition = "2021"
+include = ["src/**/*", "README.md"]
 
 [profile.release]
 lto = true

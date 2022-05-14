@@ -1,80 +1,22 @@
-* :not(ul, ol, li, tr, th, td) {
+/* REMOVE DEFAULTS */
+body { margin-top: 0; }
+* :not(ul, ol, li, tr, th, td, body) {
     margin: 0;
     padding: 0;
 }
 
-body {
-  overflow-y: scroll;
-}
-
-ul, ol {
-    margin: 0 1em;
-    padding: 0 1em;
-}
-
-:not(pre) > code {
-    padding: 0.25em;
-}
-
-pre, code {
-    color: #333;
-    background: #f5f2f0;
-    font-family: monospace;
-}
-
-blockquote, pre {
-    margin: 0.25em 0;
-    padding: 0.5em;
-}
-
+/* HEADER */
 header {
-    top: 0; 
+    top: 0;
+    z-index: 1;
     position: sticky;
-    background-color: white;
+    background: white;
     margin-bottom: 0.5em;
 }
 
-input, textarea, button, select {
-    padding: 0.25em;
-    font-size: inherit;
-    border: 1px solid black;
-}
-
-select {
-    background: white;
-}
-
-button {
-    color: #fff;
-    padding: 0.5em 1em;
-    background: #0062cc; 
-    -webkit-touch-callout: none;
-      -webkit-user-select: none;
-       -khtml-user-select: none;
-         -moz-user-select: none;
-          -ms-user-select: none;
-              user-select: none;
-}
-
-button:hover { 
-    background: #007bff;
-    cursor: pointer;
-}
-
-button:disabled {
-    background: rgba(239, 239, 239, 0.3);
-    color: rgba(239, 239, 239, 0.0);
-}
-
-button:disabled:hover {
-    cursor: unset;
-}
-
-textarea {
-  resize: none;
-}
-
+/* NAVBAR */
 nav { float: right; }
+nav > a:not(:first-child) { margin-left: 0.4em; }
 
 #nav, main { 
     margin: 0 auto; 
@@ -84,7 +26,13 @@ nav { float: right; }
 #nav { padding: 0.25em; }
 #nav > * { font-size: 1.5rem; }
 #nav { border-bottom: 2px solid black; }
+#nav > a:not(:first-child) { margin-left: 0.4em; }
 
+/* BUTTONS, INPUT */
+input, textarea, button, select { padding: 0.25em; }
+button { padding: 0.5em 1em; }
+
+/* FORMS */
 #form-middle {
     margin: 0 auto;
     max-width: 40em;
@@ -92,46 +40,11 @@ nav { float: right; }
 #form-middle button { float: right; }
 #form-middle input, textarea { width: 100%; margin: 0.25em 0; }
 
+/* THREADS */
 .overflows { word-wrap: break-word; }
+.thread-listing:not(:first-child) { margin: 1em 0; }
+#comment { margin-top: 1em; }
+#comments > .thread-listing:first-child { margin-top: 1em; }
+.inline { display: inline; }
+.category { padding: 0.25em 0.5em; font-size: 75%; }
 
-.thread-listing:not(:first-child) {
-    margin: 1em 0; 
-}
-
-#comments > .thread-listing:first-child {
-    margin-top: 1em;
-}
-
-.inline {
-    display: inline;
-}
-
-.category {
-    color: #333;
-    padding: 0.1em;
-    font-size: 75%;
-    font-weight: bold;
-    background: #fffcd7;
-    border: 1px solid black;
-}
-
-.category:hover {
-    background: #fffcd7;
-    text-decoration: underline;
-}
-
-#nav > a:not(:first-child) {
-    margin-left: 0.1em;
-}
-
-#nav > a:not(:first-child)::before {
-    padding-left: 0.2em;
-    padding-right: 0.4em;
-    content: "|";
-}
-
-nav > a:not(:first-child)::before {
-    padding-left: 0.2em;
-    padding-right: 0.4em;
-    content: "|";
-}
