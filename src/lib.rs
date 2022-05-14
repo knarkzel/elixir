@@ -18,4 +18,4 @@ pub struct Db(rusqlite::Connection);
 
 pub const URL: &str = "main.sqlite";
 
-pub type ApiResult<T> = std::result::Result<T, error::ApiError>;
+pub type ApiResult<T> = std::result::Result<T, ApiError>;
