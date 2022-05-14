@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS threads (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    user_id INTEGER NOT NULL,
+    categories TEXT,
+    title TEXT NOT NULL,
+    published TEXT NOT NULL
+);

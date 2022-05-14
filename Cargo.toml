@@ -5,6 +5,7 @@ edition = "2021"
 include = ["src/**/*", "README.md"]
 
 [dependencies]
+glob = "0.3"
 tokio = "1.10"
 chrono = "0.4"
 ammonia = "3.1"

@@ -394,6 +394,7 @@ version = "0.1.0"
 dependencies = [
  "ammonia",
  "chrono",
+ "glob",
  "pulldown-cmark",
  "rocket",
  "rocket_auth",

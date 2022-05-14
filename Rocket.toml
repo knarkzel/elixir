@@ -1,5 +1,5 @@
 [global.databases]
-main = { url = "database/main.sqlite" }
+main = { url = "main.sqlite" }
 
 [debug]
 port = 8000

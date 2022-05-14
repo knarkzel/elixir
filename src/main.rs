@@ -2,8 +2,10 @@ use elixir::*;
 
 #[launch]
 async fn rocket() -> _ {
-    migrations::install().expect("Error when migrating");
+    // Migrations
+    utils::migrations().expect("Failed to run migrations");
 
+    // Users
     let users = Users::open_sqlite(crate::URL)
         .await
         .expect(&format!("Error connecting to {}", &crate::URL));
